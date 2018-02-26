@@ -1,0 +1,947 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nyt/global/}
+    \entry{antenucci2014}{report}{}
+      \name{author}{5}{}{%
+        {{hash=7373191fec6c657515c7b4daad1c9b37}{%
+           family={Antenucci},
+           family_i={A\bibinitperiod},
+           given={Dolan},
+           given_i={D\bibinitperiod}}}%
+        {{hash=f398709307e956778fb9837e01664dad}{%
+           family={Cafarella},
+           family_i={C\bibinitperiod},
+           given={Michael},
+           given_i={M\bibinitperiod}}}%
+        {{hash=85ea7dbef0dcdd01926674a2928dc400}{%
+           family={Levenstein},
+           family_i={L\bibinitperiod},
+           given={Margaret},
+           given_i={M\bibinitperiod}}}%
+        {{hash=eb1f5a2ba08ea12db36c871fe601f5f1}{%
+           family={Ré},
+           family_i={R\bibinitperiod},
+           given={Christopher},
+           given_i={C\bibinitperiod}}}%
+        {{hash=6211bcaec23ee9d0e86581f6b1724dc5}{%
+           family={Shapiro},
+           family_i={S\bibinitperiod},
+           given={Matthew\bibnamedelima D.},
+           given_i={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {National Bureau of Economic Research, Inc}%
+      }
+      \strng{namehash}{4bb368f2a4bd90a66fe3ff512bd84c4f}
+      \strng{fullhash}{9a34d7010156aba0167ecbce66717fb0}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelyear}{2014}
+      \field{labelmonth}{03}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{03}
+      \field{number}{20010}
+      \field{title}{{Using Social Media to Measure Labor Market Flows}}
+      \field{type}{NBER Working Papers}
+      \field{year}{2014}
+    \endentry
+    \entry{anvik2010}{report}{}
+      \name{author}{2}{}{%
+        {{hash=e8a036abecccec3aa48d2d26182e4523}{%
+           family={Anvik},
+           family_i={A\bibinitperiod},
+           given={Christian},
+           given_i={C\bibinitperiod}}}%
+        {{hash=cf6c76ae1f0fbbb2e1cfa9a43b251b68}{%
+           family={Gjelstad},
+           family_i={G\bibinitperiod},
+           given={Kristoffer},
+           given_i={K\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {Centre for Research in Economics}%
+        {Management (CREAM), BI Norwegian Business School}%
+      }
+      \strng{namehash}{47c9da28106e2a8dcfc32753e2de5ad4}
+      \strng{fullhash}{47c9da28106e2a8dcfc32753e2de5ad4}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelyear}{2010}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{11}
+      \field{title}{“Just Google it”: Forecasting Norwegian unemployment figures with web queries}
+      \field{type}{Working papers}
+      \field{year}{2010}
+    \endentry
+    \entry{banbura2013}{report}{}
+      \name{author}{4}{}{%
+        {{hash=e25ec9356d870687dd117dd94e62d3bb}{%
+           family={Bańbura},
+           family_i={B\bibinitperiod},
+           given={Marta},
+           given_i={M\bibinitperiod}}}%
+        {{hash=5bd75a97c4a951e753c86c8edbc8a560}{%
+           family={Giannone},
+           family_i={G\bibinitperiod},
+           given={Domenico},
+           given_i={D\bibinitperiod}}}%
+        {{hash=4f2a61f3d750cd6a533d7dddec557865}{%
+           family={Modugno},
+           family_i={M\bibinitperiod},
+           given={Michele},
+           given_i={M\bibinitperiod}}}%
+        {{hash=7b2f5c758fdfb711329e5ce8613416ee}{%
+           family={Reichlin},
+           family_i={R\bibinitperiod},
+           given={Lucrezia},
+           given_i={L\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {European Central Bank}%
+      }
+      \strng{namehash}{26e304bbe6e6f28928a6e9e60b26294e}
+      \strng{fullhash}{3bb0ad9647e45c4f6c9517a02f35a73e}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelyear}{2013}
+      \field{labelmonth}{07}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{07}
+      \field{number}{1564}
+      \field{title}{{Now-casting and the real-time data flow}}
+      \field{type}{Working Paper Series}
+      \field{year}{2013}
+    \endentry
+    \entry{bjornland2015}{book}{}
+      \name{author}{2}{}{%
+        {{hash=07f042fc913910c8ec78802c33ad2ad1}{%
+           family={Bjørnland},
+           family_i={B\bibinitperiod},
+           given={Hilde},
+           given_i={H\bibinitperiod}}}%
+        {{hash=eca44f8cf3b273ab040cd4e0843b0acd}{%
+           family={Thorsrud},
+           family_i={T\bibinitperiod},
+           given={Leif\bibnamedelima Anders},
+           given_i={L\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Gyldendal}%
+      }
+      \strng{namehash}{767bd64ddad97109f10b0d7db44b1f8b}
+      \strng{fullhash}{767bd64ddad97109f10b0d7db44b1f8b}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelyear}{2015}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2}
+      \field{title}{Applied time series for macroeconomics}
+      \field{year}{2015}
+      \field{pages}{88}
+      \range{pages}{1}
+    \endentry
+    \entry{campos2003}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b3cff5bed07fa661bcfe339965b633c8}{%
+           family={Campos},
+           family_i={C\bibinitperiod},
+           given={Julia},
+           given_i={J\bibinitperiod}}}%
+        {{hash=995b13037ca13a61b00d1ad36f10c622}{%
+           family={Hendry},
+           family_i={H\bibinitperiod},
+           given={David\bibnamedelima F},
+           given_i={D\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=175a5f7e65ce3ac6db4b22b9f959b5a3}{%
+           family={Krolzig},
+           family_i={K\bibinitperiod},
+           given={Hans-Martin},
+           given_i={H\bibinithyphendelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{4d17b94706f4f266c686f623c4560e5d}
+      \strng{fullhash}{767c800d100f0fe5f10da1a0326d0a2f}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelyear}{2003}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Oxford Bulletin of Economics and Statistics}
+      \field{number}{s1}
+      \field{title}{Consistent model selection by an automatic Gets approach}
+      \field{volume}{65}
+      \field{year}{2003}
+      \field{pages}{803\bibrangedash 819}
+      \range{pages}{17}
+    \endentry
+    \entry{carriere2013}{article}{}
+      \name{author}{2}{}{%
+        {{hash=273e465dda9bb94cc7b41646324e34bd}{%
+           family={Carrière-Swallow},
+           family_i={C\bibinithyphendelim S\bibinitperiod},
+           given={Yan},
+           given_i={Y\bibinitperiod}}}%
+        {{hash=2943a1a81c3db90ef3793e8e81011678}{%
+           family={Labbé},
+           family_i={L\bibinitperiod},
+           given={Felipe},
+           given_i={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{266ec712e9d3fb6f4d90938238ab2e0c}
+      \strng{fullhash}{266ec712e9d3fb6f4d90938238ab2e0c}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelyear}{2013}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Forecasting}
+      \field{number}{4}
+      \field{title}{Nowcasting with Google Trends in an Emerging Market}
+      \field{volume}{32}
+      \field{year}{2013}
+      \field{pages}{289\bibrangedash 298}
+      \range{pages}{10}
+      \keyw{nowcasting,Google Trends,forecast accuracy,emerging markets}
+    \endentry
+    \entry{choi2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a840cef9448956afaeb957f2fcb1d7db}{%
+           family={Choi},
+           family_i={C\bibinitperiod},
+           given={Hyunyoung},
+           given_i={H\bibinitperiod}}}%
+        {{hash=0b840aa17b98181dc0d4e49eea53290e}{%
+           family={Varian},
+           family_i={V\bibinitperiod},
+           given={Hal},
+           given_i={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{038cc51e74dc4cefa80d26c205e5bf80}
+      \strng{fullhash}{038cc51e74dc4cefa80d26c205e5bf80}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Economic Record}
+      \field{number}{s1}
+      \field{title}{Predicting the present with Google Trends}
+      \field{volume}{88}
+      \field{year}{2012}
+      \field{pages}{2\bibrangedash 9}
+      \range{pages}{8}
+    \endentry
+    \entry{da2015}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5b436eb3d46c1bef2e5b1d704c94376b}{%
+           family={Da},
+           family_i={D\bibinitperiod},
+           given={Zhi},
+           given_i={Z\bibinitperiod}}}%
+        {{hash=5fc5bc2c8347c12b5875c293f0b39bd8}{%
+           family={Engelberg},
+           family_i={E\bibinitperiod},
+           given={Joseph},
+           given_i={J\bibinitperiod}}}%
+        {{hash=f7a88a8a2d2f4a9552421989cee85317}{%
+           family={Gao},
+           family_i={G\bibinitperiod},
+           given={Pengjie},
+           given_i={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{a2baaf913420aef988ffd430cd569edd}
+      \strng{fullhash}{8f621a1bfec3d51b018dcfae814b2bbc}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelyear}{2015}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Review of Financial Studies}
+      \field{number}{1}
+      \field{title}{{Editor's Choice The Sum of All FEARS Investor Sentiment and Asset Prices}}
+      \field{volume}{28}
+      \field{year}{2015}
+      \field{pages}{1\bibrangedash 32}
+      \range{pages}{32}
+    \endentry
+    \entry{dickey1979}{article}{}
+      \name{author}{2}{}{%
+        {{hash=8e2ad76c20c521683d5ce768771ecb01}{%
+           family={Dickey},
+           family_i={D\bibinitperiod},
+           given={David\bibnamedelima A},
+           given_i={D\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=7302eb7139a119413356796e29eac433}{%
+           family={Fuller},
+           family_i={F\bibinitperiod},
+           given={Wayne\bibnamedelima A},
+           given_i={W\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{ed6c72863d0e93ea7b028c1271229324}
+      \strng{fullhash}{ed6c72863d0e93ea7b028c1271229324}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelyear}{1979}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the American statistical association}
+      \field{number}{366a}
+      \field{title}{Distribution of the estimators for autoregressive time series with a unit root}
+      \field{volume}{74}
+      \field{year}{1979}
+      \field{pages}{427\bibrangedash 431}
+      \range{pages}{5}
+    \endentry
+    \entry{diebold1995}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3bfbd119fc58f39d88ad222f4ab69ca5}{%
+           family={Diebold},
+           family_i={D\bibinitperiod},
+           given={Francis\bibnamedelima X},
+           given_i={F\bibinitperiod\bibinitdelim X\bibinitperiod}}}%
+        {{hash=5a5681e87beda0d4f3a6ed37a7428bd4}{%
+           family={Mariano},
+           family_i={M\bibinitperiod},
+           given={Roberto\bibnamedelima S},
+           given_i={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{9703b42fbb70958d9c32118c170d541a}
+      \strng{fullhash}{9703b42fbb70958d9c32118c170d541a}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelyear}{1995}
+      \field{labelmonth}{07}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Business \& Economic Statistics}
+      \field{month}{07}
+      \field{number}{3}
+      \field{title}{{Comparing Predictive Accuracy}}
+      \field{volume}{13}
+      \field{year}{1995}
+      \field{pages}{253\bibrangedash 263}
+      \range{pages}{11}
+    \endentry
+    \entry{efron2004}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{4}{}{%
+        {{hash=5470455fc7dceb3ccf6db38cb22a113d}{%
+           family={Efron},
+           family_i={E\bibinitperiod},
+           given={Bradley},
+           given_i={B\bibinitperiod}}}%
+        {{hash=0cb8fe4210baa81c4b0e67913b4d2768}{%
+           family={Hastie},
+           family_i={H\bibinitperiod},
+           given={Trevor},
+           given_i={T\bibinitperiod}}}%
+        {{hash=269caf16d4edd41e34b3e9a22e1d2dc3}{%
+           family={Johnstone},
+           family_i={J\bibinitperiod},
+           given={Iain},
+           given_i={I\bibinitperiod}}}%
+        {{hash=88eea600247d798f8b2ce0b2dc614492}{%
+           family={Tibshirani},
+           family_i={T\bibinitperiod},
+           given={Robert},
+           given_i={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Institute of Mathematical Statistics}%
+      }
+      \strng{namehash}{a5fa507ba7d213808e02fe1b5aa1a830}
+      \strng{fullhash}{2c8fbb7027db7a3e6a2cfcb77555222d}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{labelyear}{2004}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of statistics}
+      \field{number}{2}
+      \field{title}{Least angle regression}
+      \field{volume}{32}
+      \field{year}{2004}
+      \field{pages}{407\bibrangedash 499}
+      \range{pages}{93}
+    \endentry
+    \entry{ettredge2005}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9ca718697addd5999c134ab5ae99f785}{%
+           family={Ettredge},
+           family_i={E\bibinitperiod},
+           given={Michael},
+           given_i={M\bibinitperiod}}}%
+        {{hash=b6cf492c667ac7efc973e6c9baef5ef8}{%
+           family={Gerdes},
+           family_i={G\bibinitperiod},
+           given={John},
+           given_i={J\bibinitperiod}}}%
+        {{hash=7902521b9681dcb33f06a89aa984033e}{%
+           family={Karuga},
+           family_i={K\bibinitperiod},
+           given={Gilbert},
+           given_i={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{1fb13aa3bd10326562ba3f3896f0f1c7}
+      \strng{fullhash}{e11e22e03f8b2461faf0c74d34074a0f}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{labelyear}{2005}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Communications of the ACM}
+      \field{number}{11}
+      \field{title}{Using web-based search data to predict macroeconomic statistics}
+      \field{volume}{48}
+      \field{year}{2005}
+      \field{pages}{87\bibrangedash 92}
+      \range{pages}{6}
+    \endentry
+    \entry{forni2000}{article}{}
+      \name{author}{4}{}{%
+        {{hash=da46a0f7ac9d501e7896001447c66543}{%
+           family={Forni},
+           family_i={F\bibinitperiod},
+           given={Mario},
+           given_i={M\bibinitperiod}}}%
+        {{hash=8f2fa5f0999c35286d901c160ec7c642}{%
+           family={Hallin},
+           family_i={H\bibinitperiod},
+           given={Marc},
+           given_i={M\bibinitperiod}}}%
+        {{hash=87f69230e136bd69fe2f8517e0536169}{%
+           family={Lippi},
+           family_i={L\bibinitperiod},
+           given={Marco},
+           given_i={M\bibinitperiod}}}%
+        {{hash=7b2f5c758fdfb711329e5ce8613416ee}{%
+           family={Reichlin},
+           family_i={R\bibinitperiod},
+           given={Lucrezia},
+           given_i={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{d413cf710e7dc8b87e60a7fb28640e68}
+      \strng{fullhash}{b3ee7ea73f9ecca6ef6158ce1a96eddf}
+      \field{sortinit}{F}
+      \field{sortinithash}{c6a7d9913bbd7b20ea954441c0460b78}
+      \field{labelyear}{2000}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Review of Economics and statistics}
+      \field{number}{4}
+      \field{title}{The generalized dynamic-factor model: Identification and estimation}
+      \field{volume}{82}
+      \field{year}{2000}
+      \field{pages}{540\bibrangedash 554}
+      \range{pages}{15}
+    \endentry
+    \entry{gelper2008}{report}{}
+      \name{author}{2}{}{%
+        {{hash=7815f8b23989dde774d68e915394af83}{%
+           family={Gelper},
+           family_i={G\bibinitperiod},
+           given={Sarah},
+           given_i={S\bibinitperiod}}}%
+        {{hash=bfe24d7424176c316a13411797a3e71b}{%
+           family={Croux},
+           family_i={C\bibinitperiod},
+           given={Christophe},
+           given_i={C\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {KU Leuven-Faculty of Business}%
+        {Economics}%
+      }
+      \strng{namehash}{0aaab58c99223a8bb7ea9f104d24487e}
+      \strng{fullhash}{0aaab58c99223a8bb7ea9f104d24487e}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelyear}{2008}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Least angle regression for time series forecasting with many predictors}
+      \field{type}{Working paper}
+      \field{year}{2008}
+    \endentry
+    \entry{ginsberg2009}{article}{}
+      \name{author}{6}{}{%
+        {{hash=ad3c1a14d7d9f4e3c8a306c15603ce27}{%
+           family={Ginsberg},
+           family_i={G\bibinitperiod},
+           given={Jeremy},
+           given_i={J\bibinitperiod}}}%
+        {{hash=29b5f8025f9943c2320ab13c99a1abd9}{%
+           family={Mohebbi},
+           family_i={M\bibinitperiod},
+           given={Matthew\bibnamedelima H},
+           given_i={M\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=801834cd6a80beeaa70163dcba6d5685}{%
+           family={Patel},
+           family_i={P\bibinitperiod},
+           given={Rajan\bibnamedelima S},
+           given_i={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=4d04b37cdfe19e75f08a21492ae4974b}{%
+           family={Brammer},
+           family_i={B\bibinitperiod},
+           given={Lynnette},
+           given_i={L\bibinitperiod}}}%
+        {{hash=28c6da6bee40eebcef6c8bd4293307ce}{%
+           family={Smolinski},
+           family_i={S\bibinitperiod},
+           given={Mark\bibnamedelima S},
+           given_i={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=84517b4480ff40548d2b0e631b08b581}{%
+           family={Brilliant},
+           family_i={B\bibinitperiod},
+           given={Larry},
+           given_i={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{c64db983b72d0d78eff6d32cefb25a67}
+      \strng{fullhash}{1a68ec1248d964dac651195608f1c09d}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelyear}{2009}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{number}{7232}
+      \field{title}{Detecting influenza epidemics using search engine query data}
+      \field{volume}{457}
+      \field{year}{2009}
+      \field{pages}{1012\bibrangedash 1014}
+      \range{pages}{3}
+    \endentry
+    \entry{gtrendsR}{manual}{}
+      \name{author}{2}{}{%
+        {{hash=7dd0676de82a69066d43fd99f0d2a901}{%
+           family={Massicotte},
+           family_i={M\bibinitperiod},
+           given={Philippe},
+           given_i={P\bibinitperiod}}}%
+        {{hash=19c16a29c7c1db67796fdee712478912}{%
+           family={Eddelbuettel},
+           family_i={E\bibinitperiod},
+           given={Dirk},
+           given_i={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{57075485ffb1b1b8923a01903f6d1025}
+      \strng{fullhash}{57075485ffb1b1b8923a01903f6d1025}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelyear}{2017}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package version 2.0.0}
+      \field{title}{gtrendsR: Perform and Display Google Trends Queries}
+      \field{year}{2017}
+      \verb{url}
+      \verb https://github.com/PMassicotte/gtrendsR
+      \endverb
+    \endentry
+    \entry{boe2011}{article}{}
+      \name{author}{2}{}{%
+        {{hash=324b4fedc67f1a4d4d7718658c6753d7}{%
+           family={McLaren},
+           family_i={M\bibinitperiod},
+           given={Nick},
+           given_i={N\bibinitperiod}}}%
+        {{hash=cf96fd3d7d23f17a01c7e290986c5973}{%
+           family={Shanbhogue},
+           family_i={S\bibinitperiod},
+           given={Rachana},
+           given_i={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{8a89f0c707bab83f839f5a11accc59b9}
+      \strng{fullhash}{8a89f0c707bab83f839f5a11accc59b9}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelyear}{2011}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bank of England Quarterly Bulletin}
+      \field{number}{2}
+      \field{title}{{Using internet search data as economic indicators}}
+      \field{volume}{51}
+      \field{year}{2011}
+      \field{pages}{134\bibrangedash 140}
+      \range{pages}{7}
+    \endentry
+    \entry{r}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=a902f7a1275f47f57554b7ea75ccd0bc}{%
+           family={{R Core Team}},
+           family_i={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Vienna, Austria}%
+      }
+      \list{organization}{1}{%
+        {R Foundation for Statistical Computing}%
+      }
+      \strng{namehash}{a902f7a1275f47f57554b7ea75ccd0bc}
+      \strng{fullhash}{a902f7a1275f47f57554b7ea75ccd0bc}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelyear}{2016}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{R: A Language and Environment for Statistical Computing}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://www.R-project.org/
+      \endverb
+    \endentry
+    \entry{scott2014}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ea8ad7e4aa875863fbc6ad3c6910fcb1}{%
+           family={Scott},
+           family_i={S\bibinitperiod},
+           given={Steven\bibnamedelima L},
+           given_i={S\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=f866b8be79f83fff29b30b05a626e2d7}{%
+           family={Varian},
+           family_i={V\bibinitperiod},
+           given={Hal\bibnamedelima R},
+           given_i={H\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Inderscience Publishers Ltd}%
+      }
+      \strng{namehash}{3ec4e98c43959ac9a444881d45a9d67a}
+      \strng{fullhash}{3ec4e98c43959ac9a444881d45a9d67a}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelyear}{2014}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Mathematical Modelling and Numerical Optimisation}
+      \field{number}{1-2}
+      \field{title}{Predicting the present with bayesian structural time series}
+      \field{volume}{5}
+      \field{year}{2014}
+      \field{pages}{4\bibrangedash 23}
+      \range{pages}{20}
+    \endentry
+    \entry{statcounter2016}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=fee3fc182e02f376217580e5bfec4f51}{%
+           family={StatCounter},
+           family_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{fee3fc182e02f376217580e5bfec4f51}
+      \strng{fullhash}{fee3fc182e02f376217580e5bfec4f51}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelyear}{2016}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Extracted 27.04.17}
+      \field{title}{Top 5 Desktop, Tablet \& Console Search Engines in Norway, July 2016}
+      \field{year}{2016}
+      \verb{url}
+      \verb http://gs.statcounter.com/
+      \endverb
+    \endentry
+    \entry{ssb2015}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=2aa85a19e2941f7003af85543c65369d}{%
+           family={{Statistics Norway}},
+           family_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{2aa85a19e2941f7003af85543c65369d}
+      \strng{fullhash}{2aa85a19e2941f7003af85543c65369d}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelyear}{2015}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Extracted 27.04.17}
+      \field{title}{{ICT usage in households, 2015, 2nd quarter}}
+      \field{year}{2015}
+      \verb{url}
+      \verb http://www.ssb.no/en/teknologi-og-innovasjon/statistikker/ikthus/aar/2015-10-01
+      \endverb
+    \endentry
+    \entry{ssb2016}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=2aa85a19e2941f7003af85543c65369d}{%
+           family={{Statistics Norway}},
+           family_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{2aa85a19e2941f7003af85543c65369d}
+      \strng{fullhash}{2aa85a19e2941f7003af85543c65369d}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelyear}{2016}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Extracted 27.04.17}
+      \field{title}{{ICT usage in households, 2016, 2nd quarter}}
+      \field{year}{2016}
+      \verb{url}
+      \verb http://www.ssb.no/en/teknologi-og-innovasjon/statistikker/ikthus
+      \endverb
+    \endentry
+    \entry{stephens2014}{report}{}
+      \name{author}{2}{}{%
+        {{hash=834e339995dc63b046518a60d7535899}{%
+           family={Stephens-Davidowitz},
+           family_i={S\bibinithyphendelim D\bibinitperiod},
+           given={Seth},
+           given_i={S\bibinitperiod}}}%
+        {{hash=0b840aa17b98181dc0d4e49eea53290e}{%
+           family={Varian},
+           family_i={V\bibinitperiod},
+           given={Hal},
+           given_i={H\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Google Mountain View, CA}%
+      }
+      \strng{namehash}{5f6e70c399bffc52ad53517907fd9676}
+      \strng{fullhash}{5f6e70c399bffc52ad53517907fd9676}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelyear}{2014}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A Hands-on Guide to Google Data}
+      \field{type}{techreport}
+      \field{year}{2014}
+    \endentry
+    \entry{thorsrud2016}{report}{}
+      \name{author}{1}{}{%
+        {{hash=eca44f8cf3b273ab040cd4e0843b0acd}{%
+           family={Thorsrud},
+           family_i={T\bibinitperiod},
+           given={Leif\bibnamedelima Anders},
+           given_i={L\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {Centre for Applied Macro-}%
+        {Petroleum economics (CAMP), BI Norwegian Business School}%
+      }
+      \strng{namehash}{eca44f8cf3b273ab040cd4e0843b0acd}
+      \strng{fullhash}{eca44f8cf3b273ab040cd4e0843b0acd}
+      \field{sortinit}{T}
+      \field{sortinithash}{423d138a005a533b47e6475e39378bf2}
+      \field{labelyear}{2016}
+      \field{labelmonth}{11}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{11}
+      \field{number}{0046}
+      \field{title}{{Nowcasting using news topics Big Data versus big bank}}
+      \field{type}{Working Papers}
+      \field{year}{2016}
+    \endentry
+    \entry{tibshirani1996}{article}{}
+      \name{author}{1}{}{%
+        {{hash=88eea600247d798f8b2ce0b2dc614492}{%
+           family={Tibshirani},
+           family_i={T\bibinitperiod},
+           given={Robert},
+           given_i={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{88eea600247d798f8b2ce0b2dc614492}
+      \strng{fullhash}{88eea600247d798f8b2ce0b2dc614492}
+      \field{sortinit}{T}
+      \field{sortinithash}{423d138a005a533b47e6475e39378bf2}
+      \field{labelyear}{1996}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Royal Statistical Society. Series B (Methodological)}
+      \field{title}{Regression shrinkage and selection via the lasso}
+      \field{year}{1996}
+      \field{pages}{267\bibrangedash 288}
+      \range{pages}{22}
+    \endentry
+    \entry{vosen2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ef91e79c24d2738caae972992b0e9c2f}{%
+           family={Vosen},
+           family_i={V\bibinitperiod},
+           given={Simeon},
+           given_i={S\bibinitperiod}}}%
+        {{hash=6dbf286033cb8a2e2f21af6e4e71cd6e}{%
+           family={Schmidt},
+           family_i={S\bibinitperiod},
+           given={Torsten},
+           given_i={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{d985c83f31312d7dc6e4c5417720ab58}
+      \strng{fullhash}{d985c83f31312d7dc6e4c5417720ab58}
+      \field{sortinit}{V}
+      \field{sortinithash}{d18f5ce25ce0b5ca7f924e3f6c04870e}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Applied Economics Letters}
+      \field{number}{7}
+      \field{title}{A monthly consumption indicator for Germany based on Internet search query data}
+      \field{volume}{19}
+      \field{year}{2012}
+      \field{pages}{683\bibrangedash 687}
+      \range{pages}{5}
+    \endentry
+    \entry{west1996}{article}{}
+      \name{author}{1}{}{%
+        {{hash=850309df953d8583c4dc62302690634f}{%
+           family={West},
+           family_i={W\bibinitperiod},
+           given={Kenneth\bibnamedelima D},
+           given_i={K\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {JSTOR}%
+      }
+      \strng{namehash}{850309df953d8583c4dc62302690634f}
+      \strng{fullhash}{850309df953d8583c4dc62302690634f}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelyear}{1996}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Econometrica: Journal of the Econometric Society}
+      \field{title}{Asymptotic inference about predictive ability}
+      \field{year}{1996}
+      \field{pages}{1067\bibrangedash 1084}
+      \range{pages}{18}
+    \endentry
+    \entry{wu2015}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=d54ffcae04100d88c60fac118cff2c8e}{%
+           family={Wu},
+           family_i={W\bibinitperiod},
+           given={Lynn},
+           given_i={L\bibinitperiod}}}%
+        {{hash=7bd9f54569cb8c0301da00ed49b5a752}{%
+           family={Brynjolfsson},
+           family_i={B\bibinitperiod},
+           given={Erik},
+           given_i={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {University of Chicago Press}%
+      }
+      \strng{namehash}{58e7f2f3b3fe7f7a7370f263e2cff9d6}
+      \strng{fullhash}{58e7f2f3b3fe7f7a7370f263e2cff9d6}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelyear}{2015}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Economic analysis of the digital economy}
+      \field{title}{The future of prediction: How Google searches foreshadow housing prices and sales}
+      \field{year}{2015}
+      \field{pages}{89\bibrangedash 118}
+      \range{pages}{30}
+    \endentry
+    \entry{zikopoulos2011}{book}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{2}{}{%
+        {{hash=038cd364916c934c2c6b8d2cfcb82b22}{%
+           family={Zikopoulos},
+           family_i={Z\bibinitperiod},
+           given={Paul},
+           given_i={P\bibinitperiod}}}%
+        {{hash=db4de623fab55e8f34cbf7d6a5e889bf}{%
+           family={Eaton},
+           family_i={E\bibinitperiod},
+           given={Chris},
+           given_i={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill Osborne Media}%
+      }
+      \strng{namehash}{53e38dca240068d36d249f97f9643cc5}
+      \strng{fullhash}{e40e6bd7a39c380caf8e010fd18413c5}
+      \field{sortinit}{Z}
+      \field{sortinithash}{fdda4caaa6b5fa63e0c081dcb159543a}
+      \field{labelyear}{2011}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1st ed}
+      \field{title}{Understanding big data: Analytics for enterprise class hadoop and streaming data}
+      \field{year}{2011}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

@@ -1,0 +1,63 @@
+GAMMEL
+
+The ranking step of the TS-LARS performs ranking of the variables for different lag specifications. First, specify the maximum number of predictors to be ranked, $m$. I set $m = 5$ to induce sparcity. This means that, in the ranking step, the algorithm shrinks the model from $M$ to maximum $m$ ranked predictors. In order to allow for lag dynamics in the model, each variable, $\mathbf{x_j}$ for $j = 1, \ldots, M$, in the unrestricted model, is included as $\mathbf{\underline{x}_j}$.
+
+a $T \times p$ matrix, where $p$ is the number of lags, including the contemporaneous. All the variables are standardized, i.e. I subtract the  empirical mean and divide by the empirical standard deviation\footnote{The latter is important in order to measure all the variables on the same scale.}.
+
+
+The TS-LARS algorithm starts with all the coefficients equal to zero, and then identify the predictor block most correlated with the target variable, say $x_j$. Furthermore it increases the coefficient on $x_j$ until $x_j$ is equally correlated with the residual and another predictor, say $x_k$. Then it continues in a direction equiangular to the vectors $x_j$ and $x_k$ until a third predictor, $x_l$, is included in the set of the most correlated predictors. The algorithm keeps following the equiangular vector, between the most correlated predictors and increases the set of included predictors along the way. Below is a detailed description of the algorithm.
+
+
+
+Let $\mathbf{z_0}$ be the response variable. Find the predictor block, that maximizes $R^2(\mathbf{z_0} \sim \mathbf{\underline{x}_j})$, which denotes the $R^2$ from an OLS where $\mathbf{z_0}$ is regressed on $\mathbf{\underline{x}_j}$. Recall that $\mathbf{\underline{x}_j}$ is the matrix of contemporaneous and lagged values of the predictor $\mathbf{x_j}$. Call the chosen predictor block $\mathbf{\underline{x}_{(1)}}$. This is the first predictor block included in the active set, $A$. Let $\mathbf{\hat{z}_0} = H_{(1)} \mathbf{\underline{x}_{(1)}}$. I.e. $\mathbf{\hat{z}_0}$ is the fitted values from the ortgonal projection of $\mathbf{z_0}$ on $\mathbf{\underline{x}_{(1)}}$, where $H_{(1)} = \mathbf{\underline{x}_{(1)}} (\mathbf{\underline{x'}_{(1)}} \mathbf{\underline{x}_{(1)}})^{-1} \mathbf{\underline{x'}_{(1)}}$ is the projection matrix of the space spanned by the columns of $\mathbf{\underline{x}_{(1)}}$. Update the response by removing the effect of the first variable
+
+\begin{equation}\label{response_update}
+\mathbf{z_1} = \mathbf{z_0} - \gamma_1 \mathbf{\hat{z}_0}
+\end{equation}
+
+\noindent but where $\gamma_1$ is not equal to 1 as in the OLS case, when $\mathbf{z_1}$ simply contains the OLS residuals of regressing $\mathbf{z_0}$ on $\mathbf{\underline{x}_{(1)}}$. $\gamma_1$ is chosen such that 
+
+\begin{equation}\label{gamma_selection}
+R^2(\mathbf{z_0} - \gamma_1  \mathbf{\hat{z}_0} \sim \mathbf{\underline{x}_{(1)}}) = R^2(\mathbf{z_0} - \gamma_1  \mathbf{\hat{z}_0} \sim \mathbf{\underline{x}_{(j)}}) \quad \quad \text{where} \quad \quad \mathbf{\underline{x}_{(j)}} \in A^c
+\end{equation}
+
+In particular, as shown in \cite{gelper2008}, the second predictor block in $A$ is the one with index $j$ yielding the smallest positive value of $\gamma_1$. Denote this predictor block by $\mathbf{\underline{x}_{(2)}}$. Now $A$ contains two predictors. Obtain the response $\mathbf{z_1}$ as described in equation \eqref{response_update}.
+
+Now, lets look at the steps from $k \geq 2$. At the beginning of step $k$, the active set, $A$, contains $k$ active or ranked predictors $\mathbf{\underline{x}_{(1)}}, \mathbf{\underline{x}_{(2)}}, \ldots, \mathbf{\underline{x}_{(k)}}$. The current response is denoted by $\mathbf{z_{k - 1}}$. Let $\mathbf{\tilde{x}_{(i)}}$ be the standardized vector of fitted values from the orthogonal projections for $\mathbf{z_{i - 1}}$ for $i = 1,  \ldots , k$.
+
+First, we look for the equiangular vector $\mathbf{u_k}$, which is defined as the vector having equal correlation with (equal angle between) a set of vectors $\mathbf{\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)}}$. This correlation is denoted by 
+
+\begin{equation}\label{equiangular_corr}
+a_k = Cor(\mathbf{u_k} , \mathbf{\tilde{x}_{(1)}}) = Cor(\mathbf{u_k}, \mathbf{\tilde{x}_{(2)}})= \ldots = Cor(\mathbf{u_k}, \mathbf{\tilde{x}_{(k)}})
+\end{equation}
+
+Let $R_k$ be the $(k \times k)$ correlation matrix computed from $\mathbf{\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)}}$ and $\bf{1_k}$ a vector of ones of length $k$. The equiangular vector, $\mathbf{u_k}$, is then a linear combination of the vectors $\mathbf{\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)}}$
+
+\begin{equation}\label{equiangular_vector}
+\mathbf{u_k} = (\mathbf{\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)})w_k} \quad \quad \text{with} \quad \quad \mathbf{w_k} = \frac{R_k^{-1} \bf{1_k}}{\sqrt{\bf{1_k}' R_k^{-1} \bf{1_k}}}
+\end{equation}
+
+As we can see, the equiangular vector has unit variance as it is a linear combination of variables with unit variance. The next step is to update the response by moving along the direction of the equiangular vector, $\mathbf{z_k = z_{k-1}} - \gamma_k \mathbf{u_k}$. The shrinking factor $\gamma_k$ is chosen as the smallest positive solution such that
+
+\begin{equation}\label{rsq}
+R^2(\mathbf{z_{k-1}} - \gamma_k \mathbf{u_k} \sim \mathbf{\tilde{x}_{(k)}}) = R^2(\mathbf{z_{k-1}} - \gamma_k \mathbf{u_k} \sim \mathbf{\underline{x}_{(j)}}) \quad \quad \text{where} \quad \quad \mathbf{x_j} \in A^c
+\end{equation}
+
+The associated predictor, denoted by $\mathbf{x_{(k+1)}}$, is then added to the active set. Once $\gamma_k$ is obtained, we can update the response and the new response is then standardized and again denoted by $\mathbf{z_k}$.
+
+
+
+\subsection{Selecting the optimal predictors and lag length}
+
+
+The algorithm described above is used for different values of the lag length $p$. For each $p$, I obtain the model with the number of predictors minimizing the BIC. The BIC is defined as
+
+\begin{equation}\label{bic}
+\text{BIC} = -2 \text{log-likelihood} + ln(n) k
+\end{equation}
+
+\noindent where $n =\# \text{ of variables}$ and $k = \text{\# of parameters}$. Thus, contrary to OLS, the BIC will penalize the number of parameters in the model.
+
+The final prediction model, then, is the model obtained by minimizing the BIC further over all the considered values of $p$. For simplicity, I fix the lag length across the predictors and test for $p = 1, 2$, where $p = 1$ denotes that only the contemporaneous values for the $x$'s are included in the model, and $p = 2$ denotes that both the contemporaneous and the first lag of the $x's$ are included. In addition to the clean Google model that only uses Google SVIs as predictors, I construct models where I force the algorithm to choose the first lag of the response as the first ranked predictor. This procedure is equivalent to finding the SVIs that best complements the AR(1) model.
+
+There are several methods developed for variable selection, e.g. GETS\footnote{See \cite{campos2003}}, forward stepwise regression and the LASSO\footnote{See \cite{tibshirani1996}}. LAR has several advantages. Firstly, contrary to the GETS, it can handle the case where the number of variables exceeds the number of observations, because the full unrestricted model is never estimated. Secondly, LAR does not involve any testing, and thus avoids the challenge of inflated type-1 errors. Thirdly, the LAR is less "greedy" than e.g. forward stepwise regression, because it does not project all the covariates on the response, and thus do not force the residuals to be orthogonal to the covariates. Fourthly, contrary to the LASSO, the LAR algorithm is easier in a time series context because it does not require the specification of any tuning parameters, which are usually chosen by cross validation. In addition, the time series version of the LAR has a simple way to include lags in the model.

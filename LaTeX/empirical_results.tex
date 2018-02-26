@@ -1,0 +1,334 @@
+\section{Empirical results}\label{empirical_results}
+
+The following presents the empirical results for the nowcasts of retail sales, see Section \ref{rsales} and the unemployment rate, see Section \ref{urate}.
+
+Tables \ref{rmse_rsales}, in Section \ref{rsales}, and \ref{rmse_urate}, in Section \ref{urate}, report the RMSE for the different nowcasting models for retail sales and the unemployment rate, respectively. The columns refer to the different model specifications, i.e. the benchmark models, the SVI models and the AR-SVI models. The rows refer to the RMSE for both expanding and rolling window as well as a comparison with the benchmark models, measured as the percentage change in the RMSE. Lastly, the stars refer to the p-values from a DM-test on the difference between the nowcasts. See Section \ref{evaluation} for details about the test.
+
+Figures \ref{error_diff_rsales_categories} and \ref{error_diff_rsales_queries}, in Section \ref{rsales}, and \ref{error_diff_urate_categories} and \ref{error_diff_urate_queries}, in Section \ref{urate}, show the differences in the cumulative squared prediction errors of the AR(1) and the random walk, relative to the SVI/AR-SVI models, both in terms of expanding and rolling estimation.
+
+Figures \ref{density_rsales_categories} and \ref{density_rsales_queries}, in Section \ref{rsales}, and Figures \ref{density_urate_categories} and \ref{density_urate_queries}, in Section \ref{urate}, show the distributions of categories/queries included in the nowcasting models for retail sales and the unemployment rate, respectively. I refer to Appendix \ref{model_breakdown} for a breakdown of all the nowcasting models into predictors.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Retail sales}\label{rsales}
+
+The results for the nowcasting models of retail sales indicate the following, see Table \ref{rmse_rsales}. All the models, on average, significantly outperform the predictions given by a random walk by approximately 30 - 40 pct, in terms of the RMSE. All the SVI models, except one\footnote{The difference in the predictions given by the SVI$_{\text{q}}$ model and an AR(1) with expanding window estimation is not statistically significant.}, on average, perform significantly poorer than an AR(1) model.  Furthermore, I find that, on average, none of the SVIs add any significant predictive power to an AR(1), see the AR-SVI models.
+
+\begin{table}[H]
+\center
+\scriptsize
+\begin{tabular}{@{\extracolsep{4pt}}lcccccc@{}}
+\toprule
+						& \multicolumn{2}{c}{\textbf{Benchmark models}} & \multicolumn{2}{c}{\textbf{SVI models}} & \multicolumn{2}{c}{\textbf{AR-SVI models}} \\
+ \cline{2-3} \cline{4-5}  \cline{6-7} \\ [-1.5ex]
+								& AR(1) 			& Random walk 		& Categories 		& Queries 		& Categories 		& Queries \\ \\
+\textbf{Expanding window} 		& 0.9826 		& 1.8293	 		& 1.1752				& 1.1963 		& 0.9841			& 1.0433 \\
+\% change from AR(1) 			& 				& 					& (+20)$^{***}$ 		& (+22)$^{*}$ 	& (0) 				& (+6)$^{**}$ \\
+\% change from random walk 		& 				& 					& (-36)$^{***}$ 		& (-35)$^{***}$ 	& (-46)$^{***}$		& (-43)$^{***}$ \\ \\
+			
+\textbf{Rolling window} 			& 0.9825 		& 1.8293 			& 1.2315 			& 1.3583 		& 1.0103 			& 1.0525 \\
+\% change from AR(1) 			& 				& 					& (+25)$^{**}$		& (+38)$^{**}$ 	& (+3) 				& (+7) \\
+\% change from random walk 		& 				& 					& (-33)$^{**}$ 		& (-26)$^{**}$ 	& (-45)$^{***}$ 		& (-42)$^{***}$ \\			
+\bottomrule
+\multicolumn{7}{l}{$^{*}p < 0.1$, $^{**}p < 0.05$, $^{***}p < 0.01$} \\
+\end{tabular}
+\caption{Root mean squared error for the nowcast of the monthly growth rate in retail sales. The numbers in parantheses indicate whether the SVI/AR-SVI model performs better or worse than the benchmark models, in terms of the percentage change in the RMSE. The stars refer to the p-values from a Diebold-Mariano test and indicate whether the difference is statistically significant. All the computed standard errors are heteroskedasticity and autocorrelation robust. January 2010 - January 2017.}
+\label{rmse_rsales}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Figure \ref{error_diff_rsales_categories} shows the difference in the cumulative squared prediction error from the benchmark models relative to the SVI$_\text{c}$/AR-SVI$_\text{c}$ models, i.e. when the SVIs used are at the category level. The figure shows that both the SVI$_\text{c}$ and the AR-SVI$_\text{c}$, both in terms of expanding and rolling estimation, outperform a random walk during the whole test sample, see the increasing dotted lines. There are some large jumps in the series in early 2012, 2013 and 2015. Figures \ref{rsales_sa} and \ref{rsales_d_sa} show large movements in these particular periods, and the event in early 2015 is the most extreme, well in line with what we observe here. Hence, the results indicate that the SVI$_\text{c}$/AR-SVI$_\text{c}$ models perform substantially better than a random walk when the target variable is subject to large shocks.
+
+In terms of the performance relative to an AR(1) the picture is more mixed. With few exceptions, an AR(1) outperforms the SVI$_c$ model during the whole sample, and the largest jumps are exactly during the events describes above, i.e. early 2012, 2013 and 2015, see Figures \ref{error_diff_rsales_categories_plain_expanding} and \ref{error_diff_rsales_categories_plain_rolling}. However, the AR-SVI$_c$ model outperforms an AR(1) in the same periods, see Figures \ref{error_diff_rsales_categories_ar_expanding} and \ref{error_diff_rsales_categories_ar_rolling}. This indicates that the SVIs contribute with valuable information complementary to the autoregressive component during these shocks. Interestingly, an AR(1) seems to "catch up" with the AR-SVI$_c$ in the subsequent period. Hence, it might be that the AR-SVI$_c$ model overestimates the persistence of the shock. In addition, an AR(1) model vastly outperforms the AR-SVI$_c$ model in end of the test sample, in line with the historical pattern after an episode of dominance by the AR-SVI$_c$ relative to an AR(1).
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{error_diff_rsales_categories_plain_expanding}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/pred_error_cum_diff_expanding.pdf}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{c}$ model.\\Rolling window.}
+\label{error_diff_rsales_categories_plain_rolling}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/pred_error_cum_diff_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{Relative to the AR-$\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{error_diff_rsales_categories_ar_expanding}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/pred_error_cum_diff_expanding_ar.pdf}
+    \end{subfigure}\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the AR-$\text{SVI}_\text{c}$ model.\\Rolling window.} 
+\label{error_diff_rsales_categories_ar_rolling}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/pred_error_cum_diff_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Retail sales. Difference in the cumulative squared prediction errors relative to the SVI$_c$/AR-SVI$_c$ models, for expanding and rolling estimation. An increasing series means that the SVI$_c$/AR-SVI$_c$ model performs better, in terms of lower squared prediction error, than the respective benchmark model, and vice versa. The series are plotted on different scales.}
+\label{error_diff_rsales_categories}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{error_diff_rsales_queries_plain_expanding}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/pred_error_cum_diff_expanding.pdf}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{q}$ model.\\Rolling window.}
+\label{error_diff_rsales_queries_plain_rolling}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/pred_error_cum_diff_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{Relative to the AR-$\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{error_diff_rsales_queries_ar_expanding}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/pred_error_cum_diff_expanding_ar.pdf}
+    \end{subfigure}\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the AR-$\text{SVI}_\text{q}$ model.\\Rolling window.} 
+\label{error_diff_rsales_queries_ar_rolling}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/pred_error_cum_diff_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Retail sales. Difference in the cumulative squared prediction errors relative to the SVI$_q$/AR-SVI$_q$ models, for expanding and rolling estimation. An increasing series means that the SVI$_q$/AR-SVI$_q$ model performs better, in terms of lower squared prediction error, than the respective benchmark model, and vice versa. The series are plotted on different scales.}
+\label{error_diff_rsales_queries}
+\end{figure}
+
+Figure \ref{error_diff_rsales_queries} shows the difference in the cumulative squared prediction error from the benchmark models relative to the SVI$_\text{q}$/AR-SVI$_\text{q}$ models, i.e. when the SVIs used are at the query level. In terms of the performance relative to a random walk, the picture is almost identical to the one in Figure \ref{error_diff_rsales_categories}, described above.
+
+In terms of the performance relative to an AR(1) there is a common trend downward in all the panels, meaning that an AR(1) outperforms the SVI$_\text{q}$/AR-SVI$_\text{q}$ models. However, there are some periods of exception, especially for the AR-SVI$_\text{q}$ model. The performance of the SVI$_\text{q}$ model is similar to the performance of the SVI$_\text{c}$. However, the SVI$_\text{q}$ model performs worse than the SVI$_\text{c}$ model relative to an AR(1) during the shock in early 2015, see the large drops in Figures \ref{error_diff_rsales_queries_plain_expanding} and \ref{error_diff_rsales_queries_plain_rolling}. An interesting observation is that the SVI$_\text{q}$ model performs equally well as an AR(1) from early 2015 to 2017. Contrary to the AR-SVI$_\text{c}$ model, the AR-SVI$_\text{q}$ model seems to be outperformed by an AR(1) during the shocks in early 2012, 2013 and 2015 for the expanding estimation, whereas the picture is more complex for the rolling estimation.
+
+In sum, I find mixed results for the nowcasting performance by the SVIs related to retail sales. In terms of average performance, I find that the models that include SVIs as predictors perform worse than an AR(1). However, I find that, during periods of high volatility in the retail sales index, some of the models that include SVIs as predictors partly outperform an AR(1). Nevertheless, the gains from the SVIs often seem to be reversed in the subsequent periods, indicating that the models that include SVIs as predictors overestimate the persistence of a shock.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure \ref{density_rsales_categories} shows the distribution of category SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. I will emphasize two findings that are in line with the intution. First, the number of different SVIs used as predictors throughout the test sample, are higher for the rolling estimation than the expanding estimation. The rolling estimation gives the model a shorter memory, and hence to a larger extent replaces the predictors when their predictive power changes over time. Second, I find that the most common categories are gifts, luxury goods, watches (Antiques and other collectibles), flowers, product reviews \& price comparisons, clothing etc. The top 2 categories are equal for the SVI$_c$ and the AR-SVI$_c$ for expanding and rolling estimation, respectively.
+
+Figure \ref{density_rsales_queries} shows the distribution of query SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. Like the category SVIs above, I find that the number of different SVIs used as predictors are higher for the rolling estimation than the expanding estimation. The most common queries are related to clothing, multimedia, sports etc.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{density_plain_expanding_categories}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/density_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{c}$ model.\\Rolling window.}
+\label{density_plain_rolling_categories}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/density_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{density_ar_expanding_categories}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/density_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{c}$ model.\\Rolling window.}
+\label{density_ar_rolling_categories}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/density_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Retail sales. Distribution of category SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. If an SVI is equal to 1, it is always included in the nowcasting model.}
+\label{density_rsales_categories}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{density_plain_expanding_queries}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/density_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{q}$ model.\\Rolling window.}
+\label{density_plain_rolling_queries}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/density_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{density_ar_expanding_queries}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/density_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{q}$ model.\\Rolling window.}
+\label{density_ar_rolling_queries}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/density_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Retail sales. Distribution of query SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. If an SVI is equal to 1, it is always included in the nowcasting model.}
+\label{density_rsales_queries}
+\end{figure}
+
+A particularly interesting finding, from Figures \ref{density_rsales_categories} and \ref{density_rsales_queries}, is that, to a large extent, the SVI models and the AR-SVI models include the same categories/queries. Hence, the categories/queries that have the most predictive power on their own, are to a large extent, the same as the categories/queries that add the most predictive power to the AR(1), i.e. that complement the AR(1). One interpretation of this finding might be that the top SVI predictors, both when I do and do not condition on the AR(1), capture different signals than the ones captured by the autoregressive component of the target variable, and hence work as a complementary source of information.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Unemployment rate}\label{urate}
+
+The results for the nowcasts of the change in the unemployment rate indicate the following, see Table \ref{rmse_urate}. The SVI/AR-SVI models, on average, significantly outperform the predictions given by a random walk model, in terms of RMSE, by approximately 30 pct. and 20 pct., respectively.
+
+Further, I find that the SVI models, on average, perform equally good as an AR(1) model. An important property to keep in mind is that the SVIs are available from the first day of the current month and updated each day, while the autoregressive (lag) part of the target variable is not available until the end of the current month. Hence, if the SVIs can give equally accurate nowcasts up to one month earlier, this is a strong result\footnote{I stress that I have used end-of-month measures in the analysis, and hence that I cannot know how well the SVI models perform throughout the current month. However, if the SVIs are relatively stable during a single month, the end-of-month measures should be a good approximation.}. Further I find that, on average, the SVIs do not improve upon the predictions given by an AR(1) model, see the AR-SVI models.
+\vspace{0.5cm}
+
+\begin{table}[H]
+	\center
+	\scriptsize
+		\begin{tabular}{@{\extracolsep{4pt}}lcccccc@{}}
+  			\toprule
+ 			& \multicolumn{2}{c}{\textbf{Benchmark models}} & \multicolumn{2}{c}{\textbf{SVI models}} & \multicolumn{2}{c}{\textbf{AR-SVI models}} \\
+ 			\cline{2-3} \cline{4-5}  \cline{6-7} \\ [-1.5ex]
+			& AR(1) & Random walk & Categories & Queries & Categories & Queries \\ \\
+			\textbf{Expanding window} & 0.06129 & 0.08612 & 0.06311 & 0.05925 & 0.06907 & 0.06566 \\
+			\% change from AR(1) & & & (+3) & (-3) & (+13)$^{**}$ & (+7)$^{*}$ \\
+			\% change from random walk & & & (-27)$^{**}$  & (-31)$^{***}$ & (-20)$^{**}$ & (-24)$^{***}$ \\ \\
+			
+			\textbf{Rolling window} & 0.06133 & 0.08612 & 0.05692 & 0.0597 & 0.06876 &  0.06443\\
+			\% change from AR(1) & & & (-7) & (-3) & (+12)$^{*}$ & (+5) \\
+			\% change from random walk & & & (-34)$^{***}$ & (-31)$^{***}$ & (-20)$^{**}$ & (-25)$^{***}$ \\			
+			\bottomrule
+			\multicolumn{7}{l}{$^{*}p < 0.1$, $^{**}p < 0.05$, $^{***}p < 0.01$} \\
+		\end{tabular}
+\caption{Root mean squared error for the nowcast of the monthly change in the unemployment rate. The numbers in parantheses indicate whether the SVI/AR-SVI model performs better or worse than the benchmark models, in terms of the percentage change in the RMSE. The stars refer to the p-values from a Diebold-Mariano test and indicate whether the difference is statistically significant. All the computed standard errors are heteroskedasticity and autocorrelation robust. January 2010 - January 2017.}
+\label{rmse_urate}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage Figure \ref{error_diff_urate_categories} shows the difference in the cumulative squared prediction error from the benchmark models relative to the SVI$_\text{c}$/AR-SVI$_\text{c}$ models. The figures indicate that the SVI$_\text{c}$/AR-SVI$_\text{c}$ models outperform a random walk during a vast majority of the test sample periods. A few noteworthy exceptions are in 2011, a period characterized by low volatility in the unemployment rate, see Figures \ref{error_diff_urate_categories_plain_expanding}, \ref{error_diff_urate_categories_ar_expanding} and \ref{error_diff_urate_categories_ar_rolling}, and late 2012, see Figure \ref{error_diff_urate_categories_ar_rolling}.
+
+In terms of the performance relative to an AR(1) the picture is mixed. The SVI$_\text{c}$ model, with expanding estimation, is mostly outperformed by an AR(1) from 2010 - 2012, but vastly outperforms an AR(1) from 2013 - 2016 with some few exceptions, before the sign changes again, see Figure \ref{error_diff_urate_categories_plain_expanding}. Comparing this to Figure \ref{urate_d_sa} in Section \ref{target} gives an interesting observation. From 2011 - 2012 and from 2016, the unemployment rate was characterized by low volatility. Further, from 2013 - 2016 the unemployment rate was characterized by high volatility. Hence, there seems to be a pattern where the SVI$_\text{c}$ model outperforms the AR(1) model in periods of high volatility, and vice versa. With rolling estimation, the SVI$_\text{c}$ model to a large extent outperforms an AR(1) model. However, there are some substantial reversals, like the ones in early 2011, characterized by low volatility, the middle of 2012 and the early 2015, see Figure \ref{error_diff_urate_categories_plain_rolling}. The AR-SVI$_\text{c}$ model is mainly outperformed by an AR(1) during the whole test sample, see Figures \ref{error_diff_urate_categories_ar_expanding} and \ref{error_diff_urate_categories_ar_rolling}.
+
+Figure \ref{error_diff_urate_queries} shows the difference in the cumulative squared prediction error from the benchmark models relative to the SVI$_\text{q}$/AR-SVI$_\text{q}$ models. The figures show that the SVI$_\text{q}$/AR-SVI$_\text{q}$ models outperform a random walk almost without exceptions during the whole test sample.
+
+In terms of the performance of the SVI$_\text{q}$ model relative to an AR(1) the picture is mixed depending on the estimation method. When I use expanding estimation, the picture is quite similar to the one for the SVI$_\text{c}$ model above, see Figures \ref{error_diff_urate_queries_plain_expanding} and \ref{error_diff_urate_categories_plain_expanding}. When I use rolling estimation, however, the picture is far more volatile and mixed. Here, the SVI$_\text{q}$ model outperforms an AR(1) in the first half of 2010, the middle of 2011, late 2012, 2015 and second half of 2016, while the reverse happens in the other periods, see Figure \ref{error_diff_urate_queries_plain_rolling}.
+
+The peformance of the AR-SVI$_\text{q}$ model is quite similar for the expanding and rolling estimation, see Figures \ref{error_diff_urate_queries_ar_expanding} and \ref{error_diff_urate_queries_ar_rolling}. The AR-SVI$_\text{q}$ model outperforms an AR(1) in the beginning of 2012, but for the rest of the test sample, the reverse pattern applies. \clearpage
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{error_diff_urate_categories_plain_expanding}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/pred_error_cum_diff_expanding.pdf}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{c}$ model.\\Rolling window.}
+\label{error_diff_urate_categories_plain_rolling}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/pred_error_cum_diff_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{Relative to the AR-$\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{error_diff_urate_categories_ar_expanding}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/pred_error_cum_diff_expanding_ar.pdf}
+    \end{subfigure}\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the AR-$\text{SVI}_\text{c}$ model.\\Rolling window.} 
+\label{error_diff_urate_categories_ar_rolling}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/pred_error_cum_diff_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Unemployment rate. Difference in the cumulative squared prediction errors relative to the SVI$_c$/AR-SVI$_c$ models, for expanding and rolling estimation. An increasing series means that the SVI$_c$/AR-SVI$_c$ model performs better, in terms of lower squared prediction error, than the respective benchmark model, and vice versa. The series are plotted on different scales.}
+\label{error_diff_urate_categories}
+\end{figure} \clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!t]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{error_diff_urate_queries_plain_expanding}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/pred_error_cum_diff_expanding.pdf}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the $\text{SVI}_\text{q}$ model.\\Rolling window.}
+\label{error_diff_urate_queries_plain_rolling}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/pred_error_cum_diff_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{Relative to the AR-$\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{error_diff_urate_queries_ar_expanding}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/pred_error_cum_diff_expanding_ar.pdf}
+    \end{subfigure}\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Relative to the AR-$\text{SVI}_\text{q}$ model.\\Rolling window.} 
+\label{error_diff_urate_queries_ar_rolling}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/pred_error_cum_diff_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Unemployment rate. Difference in the cumulative squared prediction errors relative to the SVI$_q$/AR-SVI$_q$ models, for expanding and rolling estimation. An increasing series means that the SVI$_q$/AR-SVI$_q$ model performs better, in terms of lower squared prediction error, than the respective benchmark model, and vice versa. The series are plotted on different scales.}
+\label{error_diff_urate_queries}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Figure \ref{density_urate_categories} shows the distribution of category SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. Interestingly, the category "Welfare \& unemployment" is the only SVI included in the nowcasts from the SVI$_c$ model when I use expanding estimation, see Figure \ref{density_urate_expanding_categories}. However, when I use rolling estimation, and hence give the model a shorter memory, more SVIs are included, and they are also included equally often, see Figure \ref{density_urate_rolling_categories}. Figures \ref{density_urate_ar_expanding_categories} and \ref{density_urate_ar_rolling_categories} show that all the category SVIs are included at some point in the AR-SVI$_c$ model, both when I use expanding and rolling estimation. In sum, Figure \ref{density_urate_categories} indicates that queries related to welfare \& unemployment are important, for both model specifications and estimation methods, for explaining the changes in the unemployment rate, but also that the remaining categories are all relevant to some extent.
+
+Figure \ref{density_urate_queries} shows the distribution of query SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. One finding is that the word "stillinger" (vacancies in Norwegian) is a top predictor in all the panels. This is a highly intuitive result, as people that are unemployed are, per definition, looking for a job. Further, Figure \ref{density_urate_queries} shows that, as for retail sales, the number of query SVIs that are relevant for nowcasting increases when I use rolling estimation, an intuitive result explained above. The other top ranked queries are related to applications, welfare institutions and employment firms.
+
+In sum, I find quite positive results for the nowcasting models of the unemployment rate. Specifically, I find that the models that include SVIs as the only predictors perform equally good as an AR(1), and due to the timeliness of the SVIs this is a good result. Further, I find that the SVIs seem to provide the same information as the autoregressive term, and do not improve upon the predictions given by an AR(1). Lastly, as for retail sales, I find correspondence between the predictors that explain the most on their own, and the predictors that provide the most value added to an AR(1). \clearpage
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{density_urate_expanding_categories}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/density_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{c}$ model.\\Rolling window.}
+\label{density_urate_rolling_categories}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/density_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{c}$ model.\\Expanding window.}
+\label{density_urate_ar_expanding_categories}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/density_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{c}$ model.\\Rolling window.}
+\label{density_urate_ar_rolling_categories}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/density_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Unemployment rate. Distribution of category SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. If an SVI is equal to 1, it is always included in the nowcasting model.}
+\label{density_urate_categories}
+\end{figure} \clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[!t]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{density_urate_plain_expanding_queries}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/density_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\text{SVI}_\text{q}$ model.\\Rolling window.}
+\label{density_urate_plain_rolling_queries}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/density_rolling.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{q}$ model.\\Expanding window.}
+\label{density_urate_ar_expanding_queries}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/density_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{AR-$\text{SVI}_\text{q}$ model.\\Rolling window.}
+\label{density_urate_ar_rolling_queries}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/density_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Unemployment rate. Distribution of query SVIs included in the nowcasting model according to how often they are chosen by the TS-LARS algorithm. If an SVI is equal to 1, it is always included in the nowcasting model.}
+\label{density_urate_queries}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Performance during the financial crisis in 2008/2009}\label{crisis}
+
+As \textcite{choi2012} point out, it might be that the strength of SVIs does not lie in their ability to predict macroeconomic variables in ''normal'' times, but in their ability to predict turning-points better than autoregressive models, especially due to their timeliness. The preceding empirical results support this hypotheses. As an additional exercise, I briefly test this property of the SVIs by comparing the RMSE for the SVI/AR-SVI models to an AR(1) model during the financial crisis in 2008/2009. Again, my findings indicate that some of the models that include SVIs as predictors outperform an AR(1) when the target variables experience a turning point. One possible explanation for why the SVIs inhabit this property might be due to the large volatility in the SVIs, see the measures of standard deviation in Table \ref{desc_stat}. Figure \ref{fig:crisis} shows the most promising results from the financial crisis. The figure shows the difference in the squared prediction error between an AR(1) and the AR-$\text{SVI}_\text{c}$ model for the unemployment rate during the financial crisis in 2008/2009\footnote{The unemployment rate started increasing in June 2008, see Figure \ref{fig:target}.}. The AR-$\text{SVI}_\text{c}$ outperforms an AR(1) model when the series is above zero. Hence, these results indicate that it might be the case that the SVIs can add value to simple times series models when the target variables are subject to large shocks. However, I stress that these results are sensitive to different models and estimation methods, and for retail sales I do not find similar evidence\footnote{I do find that some of the models that include SVIs as predictors for retail sales can provide valuable information when the target variable is hit by a shock, but this additional value seems to be reversed in the subsequent periods.}. In sum, we can not discard the hypotheses of \textcite{choi2012} for Norway, but, due to the small number of large shocks to the Norwegian economy since 2004, we cannot draw any conclusions yet.
+\vspace{1cm}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Expanding window.}
+\label{diff_sq_error_expanding_ar_urate}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/diff_sq_error_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{Rolling window.}
+\label{diff_sq_error_rolling_ar_urate}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/diff_sq_error_rolling_ar.pdf}
+    \end{subfigure}\hfill
+\caption{Unemployment rate. Difference in the squared prediction error between an AR(1) and the AR-$\text{SVI}_\text{c}$ model during the financial crisis. When the series is above zero, the AR-$\text{SVI}_\text{c}$ model outperforms the AR(1) model. January 2008 - December 2009.}
+\label{fig:crisis}
+\end{figure}

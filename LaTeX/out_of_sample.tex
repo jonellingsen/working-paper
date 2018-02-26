@@ -1,0 +1,59 @@
+\section{Out-of-sample nowcasting}\label{out_of_sample}
+
+In order to evaluate the nowcasting performance of the models, I split the sample in two; a \textit{training} sample and a \textit{test} sample. The \textit{training} sample is used to fit the model, and the \textit{test} sample is used to evaluate the out-of-sample performance of the model. From a prediction point og view, we are typically interested in the latter. Evaluating the model by its out-of-sample performance reduces the risk of overfitting\footnote{Overfitting refers to a model with too many parameters relative to the number of observations. This increases the risk of obtaining noisy predictions out-of-sample.}. The initial \textit{training} sample runs from February 2004 - December 2009, and gives me 71 observations. The initial \textit{test} sample runs from January 2010 - January 2017, and gives me 85 observations. The reason for this division is that I get a reasonable amount of data for the estimation, as well as a long test sample to evaluate the models over time. By starting the out-of-sample exercise in 2010, I do not include the financial crisis in 2008/2009 in the test sample. However, I perform an additional out-of-sample exercise for this particular period. I compute the out-of-sample nowcasts using two different methods: expanding window and rolling window. The first has the advantage of increasing the sample size along the way. The latter has the advantage of paying more attention to the recent past than the far past. This can be an advantage in those cases where the time series are subject to large shocks in the middle of the sample.
+
+As pointed out in \textcite{scott2014}, an effective nowcasting model will consider both the past behaviour of the target variable and the contemporaneous signals from e.g. SVIs. Hence, I run two different specifications of the predictive model. In the first type of model I condition on an AR(1) model. I denote these models by AR-SVI models. The second type of model has SVIs as the only predictors. I denote these models by SVI models. To distinguish between the models that include the category SVIs and the query SVIs, I add a subscript, c or q, respectively. The first approach, where I condition on the AR(1), will highlight the value added, relative to an AR(1) model, produced by the SVIs. The second approach will highlight how well the SVIs perform in predicting the target variable at their own. The following elaborates on the out-of-sample exercise.
+
+
+\subsection{Estimation}\label{estimation}
+
+Let $\underline{t}$ and $t$ denote the first observations in the traning and test sample, respectively. Further, let $\bar{t} = t - 1$  and $\bar{T}$ denote the sample from $\underline{t}$ to $\bar{t}$. Finally, let $t^{*}$ denote a period within $\bar{T}$. I use the TS-LARS algorithm to fit the appropriate model up to period $\bar{t}$. Next, I estimate the following nowcasting models with the optimal number of ranked predictors, say $m^{*}$, and lags, say $p^{*}$, by OLS:
+
+\begin{equation}\label{tslars_fit_rsales}
+\Delta log(RS_{t^{*}}) = \beta_0 \Delta log(RS_{t^{*} - 1}) + \sum_{i = 1}^{m^{*}}\sum_{j = 0}^{p^{*}} \beta_{i, j} \Delta log(SVI_{x,\ i,\ t^{*} - j}^{RS}) + \varepsilon_{t^{*}}
+\end{equation}
+
+\begin{equation}\label{tslars_fit_urate}
+\Delta U_{t^{*}} = \beta_0 \Delta U_{t^{*} - 1} + \sum_{i = 1}^{m^{*}}\sum_{j = 0}^{p^{*}} \beta_{i, j} \Delta log(SVI_{x,\ i,\ t^{*} - j}^U) + \varepsilon_{t^{*}}
+\end{equation}
+\noindent where $p^{*} = \{0, 1\}$ depending on whether a lag of the SVIs is included or not and $x = \{c, q\}$ depending on whether category SVIs or query SVIs are used. Note that, in the SVI model, $\beta_0 = 0$ by construction in equation \eqref{tslars_fit_rsales} and \eqref{tslars_fit_urate}. In the AR-SVI model, there is no restriction on $\beta_0$. In the rolling estimation case, $\underline{t}$ will increase incrementally by one for each period, such that the length of $\bar{T}$ remains constant. In the expanding estimation case, $\underline{t}$ remains constant, so that the length of $\bar{T}$ increases for each period. I estimate all the models up to the second to last observation in the test sample.
+
+
+
+\subsection{Prediction}\label{prediction}
+
+I use the estimated OLS-parameters from models \eqref{tslars_fit_rsales} and \eqref{tslars_fit_urate} to make nowcasts of the target variables in period $\bar{t} + 1$:
+\begin{equation}\label{nowcast_rsales}
+\Delta log(\hat{RS}_{\bar{t} + 1}) = \hat{\beta}_0 \Delta log(RS_{\bar{t}}) + \sum_{i = 1}^{m^{*}}\sum_{j = 0}^{p^{*}} \hat{\beta}_{i, j} \Delta log(SVI_{x,\ i,\ \bar{t} + 1 - j}^{RS})
+\end{equation}
+\begin{equation}\label{nowcast_urate}
+\Delta \hat{U}_{\bar{t} + 1} = \hat{\beta}_0 \Delta U_{\bar{t}} + \sum_{i = 1}^{m^{*}}\sum_{j = 0}^{p^{*}} \hat{\beta}_{i, j} \Delta log(SVI_{x,\ i,\ \bar{t} + 1 - j}^{U})
+\end{equation}
+
+\noindent From equation \eqref{nowcast_rsales} and \eqref{nowcast_urate} we observe the following. Firstly, $RS_{\bar{t}}$ and $U_{\bar{t}}$ become available in the end of period $\bar{t}$, see Section \ref{target}. This means that I can only perform a nowcast with the AR-SVI models at the end of the current period, when the lag is released. Remember that this still gives a prediction of the target variables 1 month prior to the release of the official statistics. However, the SVI model can give a nowcast of the target variable in period $\bar{t}$ from the start of period $\bar{t}$, as the SVIs are published in near-real-time. How the SVIs perform in nowcasting throughout the current month is something I do not investigate due to the way Google Trends report historical data. However, if the searches are relatively constant within a month, nowcasts from the SVI model throughout the current month may be valuable.
+
+
+
+\subsection{Evaluation}\label{evaluation}
+
+The out-of-sample exercise provides predictions of the target variables for each period in the test sample. In order to evaluate the predictive performance of the models, I  compare the out-of-sample predictions from the SVI/AR-SVI models to two benchmark models - the AR(1), following \textcite{choi2012}, and a random walk. The predictions from the AR(1) are equal to the predictions from equation \eqref{nowcast_rsales} and \eqref{nowcast_urate}, with the restriction that all the $\beta_{i,j} = 0$. Further, the predictions from a random walk is equal to the predictions from the AR(1) but with a restriction that $\beta_0 = 1$.
+
+I use the root mean squared error (RMSE), as described in \textcite{bjornland2015}, to measure the accuracy of the predictive models. Denote the length of the \textit{test} sample by $P$. The RMSE is defined as:
+\begin{equation}\label{rmse_rsales}
+	\text{RMSE}^{RS} = \frac{1}{P} \sum_{i = 1}^{P} \Big(\Delta log(RS_{\bar{t} + i}) - \Delta log(\hat{RS}_{\bar{t} + i})\Big)^2 = \frac{1}{P} \sum_{i = 1}^{P} \Big(\mathrm{e}_{\bar{t} + i}^{RS}\Big)^2
+\end{equation}
+\begin{equation}\label{rmse_urate}
+	\text{RMSE}^{U} = \frac{1}{P} \sum_{i = 1}^{P} \Big(\Delta U_{\bar{t} + i} - \Delta \hat{U}_{\bar{t} + i}\Big)^2 = \frac{1}{P} \sum_{i = 1}^{P} \Big(\mathrm{e}_{\bar{t} + i}^U\Big)^2
+\end{equation}
+
+\noindent where $\mathrm{e}_{\bar{t} + i}^{RS}$ and $\mathrm{e}_{\bar{t} + i}^U$ are the prediction errors in period $\bar{t} + i$ for the prediction of retail sales and the unemployment rate, respectively\footnote{The RMSE is a symmetric loss function and larger deviations are penalized relatively harder.}. A lower RMSE indicates better predictive performance.
+
+In order to evaluate whether there are any statistically significant differences in the predictions given by the different models, I use the Diebold-Mariano (DM) test, see \textcite{diebold1995} and \textcite{west1996}. The test is performed in the following way. Let $d_{i}$ denote the difference between the squared predition errors from two models, say model 1 and 2, such that $d_i = \mathrm{e}_{\bar{t} + i, 1}^2 - \mathrm{e}_{\bar{t} + i, 2}^2$, where $i = 1, \ldots, P$. The DM-test runs the following regression by OLS:
+\begin{equation}\label{dw_test}
+	d_i = \beta_0 + u_i
+\end{equation}
+\noindent and performs a test of the following hypotheses:
+\begin{equation}\label{hypotheses}
+	H_0: \beta_0 = 0 \quad or \quad H_1: \beta_0 \neq 0
+\end{equation}
+\noindent If $H_0$ is rejected the differences in the predictions given by model 1 and 2 are statistically significant. I use heteroskedasticity and autocorrelation (HAC) robust standard errors to compute the t-statistics, in order to be on the safe side. I perform the DM-test on all the nowcasts given by the different SVI/AR-SVI models relative to the predictions given by an AR(1) and a random walk.

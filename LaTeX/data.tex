@@ -1,0 +1,145 @@
+\section{Data}\label{data}
+
+I use monthly data from January 2004 - January 2017. This sample is chosen because the data from Google Trends start in January 2004. The structure of this Section is the following. First, in Section \ref{svi}, I describe the SVIs collected from Google Trends, including the selection process, see \ref{svi_selection}, and the transformations I apply, see Section \ref{svi_transformations}. Second, in Section \ref{target}, I describe the two target variables, i.e. retail sales and the unemployment rate, and the transformations I apply.
+
+\subsection{Search value indices}\label{svi}
+
+I use the service Google Trends to collect the search value indices (SVIs)\footnote{\textcite{stephens2014} provide a detailed introduction to using Google Trends for research.}. To collect the SVIs, I use the R-package \textit{gtrendsR}, developed by \textcite{gtrendsR}. Google Trends provides indices of search activity on specific terms across time and geographical location. These indices measure the fraction of queries that include the specified term relative to the total number of queries, within a specific geographical area at a specific time. This feature of the data adjusts the SVIs for a general common trend in search activity. Furthermore, the SVIs are scaled such that the highest point in each SVI is set to 100. As a consequence, it is not possible to compare the volume of different queries from Google Trends\footnote{It is possible to scale multiple SVIs so that they may be compared in volume, but the number of SVIs compared simultaneously is restricted to 5.}. To summarize; if an SVI is increasing, this should be interpreted as an increase in searches for the specified search term as a percentage of the total amount of searches. The SVIs go back to January 2004. When downloading an SVI from a sample larger than 5 years, the frequency is monthly, and the monthly SVIs are updated on a daily basis. This timeliness make them interesting from a nowcasting perspective.
+
+There are some more aspects of the search data from Google Trends worth mentioning. Firstly, due to privacy issues, all searches below an unreported threshold, in total volume, will be reported as 0. Hence, in smaller countries, like Norway, one might encounter this problem more often than in e.g. the US. Secondly, repeated searches from the same person over a short period of time are eliminated. Thirdly, the data reported comes from an unbiased sample of the population of searches. Hence, the SVIs will vary from sample to sample, making the analysis more vulnerable to outliers. I download the SVIs at different days and find that they are relatively stable over time, and hence that the effect of the sampling property probably is negligible\footnote{One could also use an average of the SVIs downloaded at consecutive days to adjust for the sampling effect.}. See Figure \ref{fig:correlation_svi} in Appendix \ref{correlation_svi} for the a summary of the correlations between each particular SVI downloaded at different dates.
+
+There are several challenges associated with using SVIs for prediction. Three of these are especially relevant for the problem adressed in this paper. First, what is the appropriate delimitation for choosing the set of potential predictors among all the available SVIs? Second, what is the appropriate level of aggregation of these SVIs? Third, how to choose the top predictors in a predictive model from the large set of potential predictors? See Section \ref{variable_selection} for my approach to the third challenge concerning the variable selection. I address the first and second challenge below, in the opposite order.
+
+
+\subsubsection{The selection of relevant SVIs}\label{svi_selection}
+
+I address the second challenge, of choosing the appropriate level of aggregation, in the following way. One the one hand, the low level of aggregation is one of the main reasons that we use SVIs for prediction. On the other hand, too low level of aggregation may lead the model to pay too much attention to random noise. There are many statistical methods for aggregating time series, e.g. simple unweighted means, principal components, dynamic factors etc. To keep the analysis simple, transparent and easy to interpret, I choose the levels of aggregation available directly from Google Trends. Google Trends provide two types of SVIs - single queries and aggregated categories. Each query is assigned into one or multiple categories by Google. The categories are divided into main categories and subcategories, which refer to the level of aggregation. For example, one of the main categories are "Shopping". This main category has several subcategories, and one of them is the subcategory "Apparel". One of the top queries, in terms of number of searches, within the subcategory "Apparel", is "Nike". Figure \ref{trends_graphs} displays these three SVIs. The left column displays the raw indices, and the right column displays the transformed SVIs I use in the analysis.
+
+I address the first challenge, of defining the appropriate delimitation for choosing the set of potential predictors among all the available SVIs, in the following way. First, I pick, from a list of over 1400 predefined categories and subcategories in Google Trends, a subset of SVIs that are related to the target variables. Many of these categories lack the amount of data necessary to be reported in Google Trends. For retail sales, I end up with 51 category SVIs that form one set of potential predictors for retail sales. Next, I obtain the top 25 queries in the chosen categories\footnote{Google Trends reports top queries, in terms of the volume of searches, for each category.}, subjectively remove the queries that are unrelated to retail sales and add my own queries based on intuition. As for the categories, a large share of these queries lack the amount of data necessary to be reported in Google Trends. I end up with 148 query SVIs that form another set of potential predictors for retail sales. I repeat the same excercise for the unemployment rate. There, I end up with 6 category SVIs and 31 query SVIs. The reason for the substantial difference in the amount of SVIs related to retail sales and unemployment, is simply because there are less predefined categories directly related to (un)employment\footnote{In order to decrease the risk of spuriousity, I choose to only include categories that are directly related to (un)employment}. 
+In sum, I end up with 51 category SVIs and 149 query SVIs related to retail sales, and 6 category SVIs and 31 query SVIs related to unemployment. I refer to Table \ref{tab:svi_list} in Appendix \ref{svi_list} for a list of the categories and queries I have used.
+
+\begin{adjustbox}{minipage = \linewidth, scale = 0.9, valign=m}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}\caption{Main categegory: Shopping.\\Original index.}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/shopping.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}\caption{Main categegory: Shopping.\\Transformed monthly growth rate.}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/shopping_d_sa.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}\caption{Subcategegory: Apparel.\\Original index.}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/apparel.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}\caption{Subcategegory: Apparel.\\Transformed monthly growth rate.}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/apparel_d_sa.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}\caption{Single query: Nike.\\Original index.}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/nike.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}\caption{Single query: Nike.\\Transformed monthly growth rate.}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/nike_d_sa.pdf}
+\end{subfigure}
+\caption*{Source: Google Trends}
+\caption{Examples of search value indices from Google Trends. The rows show SVIs on three different levels of aggregation, from highest to lowest. The series in the right panel are the seasonally adjusted and winsorized growth rates from the original indices in the left panel, as described in section \ref{svi_transformations}. January 2004 - January 2017.}
+\label{trends_graphs}
+\end{figure}
+\end{adjustbox}
+
+
+\subsubsection{Transformations of the SVIs}\label{svi_transformations}
+
+All the SVIs are transformed in the following way, as in \textcite{da2015}. First, in order to remove trends in the data, I take the first difference of the logarithm of the series, and get an approximation of the monthly growth rate. Second, I winsorize the data at the 95 pct. level in order to remove extreme outliers that are present in the data. This means that I, for each SVI, set all observations below the $2.5$ percentile equal to the $2.5$ percentile and the observations above the $97.5$ percentile to the $97.5$ percentile. Third, due to the presence of seasonality in the SVIs, I seasonally adjust all the winsorized growth rates by regressing them on 12 monthly dummies\footnote{To avoid perfect multicollinearity, I exclude the intercept.}, where the associated residuals are kept as the seasonally adjusted series. Finally I multiply the series by 100, to get percentages as the unit. These winsorized and seasonally adjusted growth rates are the series I continue to work with. This simple method for seasonal adjustment is fine, as long as the seasonal pattern remains constant over time. Given the large amount of series, which would make individual investigation time consuming, I choose to do this simplification. The right column in Figure \ref{trends_graphs} show three examples of the transformed SVIs. Table \ref{desc_stat} gives a summary of the main statistics for the transformed SVIs. Figure \ref{fig:correlation_target} in Appendix \ref{correlation_target} shows the distribution of the correlations between the transformed SVIs and the transformed target variables. These figures suggest that the SVIs and the target variables are weakly correlated contemporaneously when we look at the whole sample.
+
+\subsection{Target variables}\label{target}
+
+I use the monthly and seasonally adjusted index of retail sales and the registered unemployment rate\footnote{The unemployment rate from NAV that I use is the one measuring the rate of "totally unemployed" registered at NAV.} reported by the official sources, Statistics Norway and NAV, respectively. Both of the variables are normally reported with approximately 1 month lag. Hence, the timeliness of the SVIs gives me data to use for nowcasting approximately 1 month before the lag of the target variable is reported. In order to get stationary target variables, I transform the series to remove trends present in the data. For the index of retail sales, I take the first difference of the logarithm of the series, and get the approximated monthly growth rate. As with the SVIs I multiply this series by 100. For the unemployment rate, I simply take the first difference, and get the change in the rate, measured as percentage points. I perform an Augmented Dickey-Fuller test, see \textcite{dickey1979}, to ensure that the transformed variables are stationary, see Table \ref{adf} in Appendix \ref{stationarity}. The reason that I choose to nowcast the seasonally adjusted series is that these are the series payed most attention to by market analysts and policy makers, who want to correct for the "normal" seasonal variation. Hence, I am interested in how well the SVIs nowcast the cyclical components, rather than the seasonal components. Using unadjusted data might lead us to think that the SVIs perform well, even in the case where their only predictive power is related to the seasonal components of the data. See Figure \ref{fig:target} for plots of the target variables and their transformations.
+
+\begin{figure}[!t]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Index of retail sales.}\label{rsales_sa}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/rsales_sa.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Monthly growth rate of retail sales.}\label{rsales_d_sa}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/rsales_d_sa.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Unemployment rate.}\label{urate_sa}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/urate_sa.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{Monthly change in the unemployment rate.}\label{urate_d_sa}
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/urate_d_sa.pdf}
+\end{subfigure}
+\caption*{Sources: Statistics Norway and NAV}
+\caption{Target variables. Retail sales and unemployment rate. All the data are seasonally adjusted from the source. January 2004 - January 2017.}
+\label{fig:target}
+\end{figure}
+
+\begin{table}[!t]
+	\scriptsize
+	\begin{tabularx}{\textwidth}{lllX}
+		\toprule
+		\textbf{Variable} & \textbf{Source} & \textbf{Frequency} & \textbf{Comments} \\
+		\midrule
+		Google SVIs & Google Trends & Monthly & Relative frequency index \\ \\
+		& & & Monthly data updated every day \\ \\
+		& & & Transformations: \\
+		& & & - Monthly growth rate in percentages$^{*}$ \\
+		& & & - Winsorization at 95 pct.$^{**}$ \\
+		& & & - Seasonal adjustment by monthly dummies $^{***}$ \\ \\
+		& & & Number of SVIs related to retail sales: \\
+		& & & - Categories: 51 \\
+		& & & - Queries: 148 \\ \\
+		& & & Number of SVIs related to unemployment: \\
+		& & & - Categories: 6 \\
+		& & & - Queries: 31 \\ \\
+		& & & Extracted : 03.04.17 \\
+		\midrule
+		Retail sales & Statistics Norway & Monthly & Volume index \\ \\
+		& & & Normally published 28-30 days after the end of the month \\ \\
+		& & & Seasonally adjusted from source \\ \\
+		& & & Transformations: \\
+		& & & - Monthly growth rate in percentages$^{*}$ \\ \\
+		& & & Extracted: 13.03.17 \\
+		\midrule
+		Unemployment rate & NAV & Monthly &  Registered totally unemployed \\ \\
+		& & & Normally published 4 weeks after the end of the month \\ \\
+		& & & Seasonally adjusted from source \\ \\
+		& & & Transformations: \\
+		& & & - Monthly change in percentage points \\ \\
+		& & & Extracted: 23.03.17 \\
+		\bottomrule
+		\multicolumn{4}{l}{$^{*}$ Approximated by 100 times the first difference of the logarithm of the series.} \\
+		\multicolumn{4}{l}{$^{**}$ This is done in order to remove extreme outliers that are present in several of the SVIs.} \\
+		\multicolumn{4}{l}{$^{***}$ I regress the transformed SVIs on 12 monthly dummies where I exclude the intercept.} \\
+		\multicolumn{4}{l}{The associated residuals are the seasonally adjusted series.}
+	\end{tabularx}
+\caption{Description of the data. January 2004 - January 2017.}
+	\label{tab:data}
+\end{table}
+\clearpage
+
+\begin{table}[h]
+	\center
+	\scriptsize
+	\begin{tabularx}{\textwidth}{@{}XXXX@{}}
+		\toprule
+ 		& \textbf{Mean} & \textbf{Median} & \textbf{Standard deviation} \\ 
+  		\midrule \\
+		\textbf{$\Delta log(RS_t)$} & 0.1532 & 0.2788 & 1.0747 \\ \\
+  		\textbf{$\Delta log(SVI_{c, t}^{RS})^*$} & -0.0000 & 0.0077 & 9.1767 \\ \\
+  		\textbf{$\Delta log(SVI_{q, t}^{RS})^*$} & 0.0000 & -0.1325 & 16.8900 \\ \\
+		\midrule \\
+  		\textbf{$\Delta U_ t$} & -0.0062 & -0.0082 & 0.0702 \\ \\
+  		\textbf{$\Delta log(SVI_{c, t}^{U})$} & -0.0000$^*$ & 0.0000$^*$ & 8.8558 \\ \\
+  		\textbf{$\Delta log(SVI_{q, t}^{U})$} & 0.0000$^*$ & -0.0000$^*$ & 16.5911 \\ \\
+   		\bottomrule
+\multicolumn{4}{l}{$^*$ Numbers are too low to be reported with 4 decimals.}
+	\end{tabularx}
+\caption{Descriptive statistics. For the SVIs, all the statistics refer to the median of the relevant statistics for the individual SVIs. The unit of measure is percentages.}
+	\label{desc_stat}
+\end{table}
+
+Table \ref{desc_stat} displays some descriptive statistics for both the target variables and the SVIs. The standard deviations indicate that the SVIs are a lot more volatile than the target variables, and, as we should expect, the volatility is negatively related to the level of aggregation. Hence, categories that are weighted averages of single queries, are less volatile than single queries. In order to simplify the variable names, I introduce some notation that I will use throughout the paper. Let $\Delta log(RS_t)$ and $ \Delta U_t$ denote the transformed retail sales index and unemployment rate in period $t$, respectively. Further, let $\Delta log(SVI_{x, t}^{y})$ denote the transformed SVIs in period $t$, where $x = \{c, q\}$ refers to whether the SVI is at the category or query level, and $y = \{RS, U\}$ refers to which target variable the SVI is related to.

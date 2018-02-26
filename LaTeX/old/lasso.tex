@@ -1,0 +1,31 @@
+\subsection{LASSO}
+
+With all the potential explanatory variables obtained from Google Trends, I would like to use some kind of variable selection method in order to choose a subset of them for prediction. I face a tradeoff in this situation. One the one hand, adding too many explanatory variables increases the risk of overfitting the model and reducing the degrees of freedom. At the other hand, adding too few explanatory variables may reduce the explanatory power and robustness of the model. I use a statistical technique called the "LASSO" which is an abbreviation for Least Absolute Shrinkage and Selection Operator, first introduced by \cite{tibshirani1996}. This method gives me a subset of variables that contain the most valuable information about the dependent variable. Of course, the coefficients in the final model will be biased, but this is not the main concern when it comes to prediction. All the variables have been standardized, i.e. they have a mean of zero and a standard deviation of one.
+
+The LASSO is defined in the following way (where the intercept term is excluded as the variables have mean zero):
+
+\begin{equation}
+ \boldsymbol{\hat{\beta}}^{\text{LASSO}} = \argmin_{\beta_1, \ldots, \beta_k} \sum_{i = 1}^N \left( y_i - \sum_{j = 1}^k \beta_j x_{ij} \right)^2 \quad\text{subject to} \quad \sum_{j = 1}^k  |\beta_j| \leq t
+\end{equation}
+
+This is a quadratic programming problem. The first sum is the ordinary least squares problem. Thus, if s is set large enough, the LASSO estimates will simply be equal to the OLS estimates. The parameter s is a tuning parameter, defining how much we want to shrinke the coefficients. The problem above can be rewritten in Lagrangian form:
+
+\begin{equation}\label{lasso_lagrange}
+\boldsymbol{\hat{\beta}}^{\text{LASSO}} = \argmin_{\beta_1, \ldots, \beta_k} \left\{\sum_{i = 1}^n \left( y_i - \sum_j \beta_j x_{ij} \right)^2 + \lambda \sum_{j}  |\beta_j|\right\}
+\end{equation}
+
+In equation \eqref{lasso_lagrange} $\lambda$ is the size of the penalization of the size of the coefficients in the regression. Thus, a higher $\lambda$ will lead the LASSO to retain fewer explanatory variables in the model. Through the \textit{glmnet} package in \textbf{R}, I get the models for different values of $\lambda$. The package employs coordinate descent algorithm. The LASSO problem is similar to the RIDGE problem, except for the penalized term being the L1 norm, instead of the more familiar L2 norm. The great advantage of the LASSO is that it introduces sparsity, i.e. it reduces the number of non-zero coefficients in the model. This is why it can be used for variable selection.
+
+The sequence of each tuning parameter is specified by taking 100 tuning parameter values between 0 and an upper bound, where the upper bound is the smallest tuning parameter value so that all regression coefficients are shrunk to zero and is found by trial and error. Empirically the upper bound has negligible impact on the estimates.
+
+L2-norm:
+\begin{equation}
+|| \vec{\beta} ||_2 = \sqrt{\vec{\beta} \cdot \vec{\beta}} = \sqrt{\beta_1^2 + \cdots + \beta_j^2}
+\end{equation}
+
+L1-norm:
+\begin{equation}
+|| \vec{\beta} ||_1 = |\beta|_1 + |\beta|_j
+\end{equation}
+
+The L2-norm creates a circle in the plane, while the L1-norm creates a diamond.

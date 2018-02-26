@@ -1,0 +1,253 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usetheme{default}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{subcaption}
+
+\title{Let's Google it}
+
+\subtitle{Can Google search indices nowcast \\
+		Norwegian retail sales and unemployment rate?}
+
+\author{Jon Ellingsen}
+
+\institute[]{Masteroppgave \\Universitetet i Oslo \\Økonomisk institutt}
+
+\date{21. juni 2017}
+
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+\begin{frame}{Bakgrunn}{Konjunkturanalyse}
+	\begin{itemize}
+		\item Utfordring: tidsetterslep \\~\\
+  		\item Løsning: Nowcasting $\equiv$ prediksjon av nåtiden \\~\\
+  		\item Implementering: samvarierte indikatorer for økonomien
+  	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Big data}
+	\begin{itemize}
+		\item Teknologisk utvikling $\rightarrow$ mer data \\~\\
+		\item Google Trends: \textbf{realtidsdata} på \textbf{dissaggregert} nivå fra søkemotoren tilbake til 2004
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hypotese}
+	\textit{''I den grad folk bruker Google som en informasjonskilde når de skal ta valg, kan Googles søkeindekser avsløre intensjoner som driver økonomiske hendelser før de fanges opp i offentlige statistikker''}
+\end{frame}
+
+
+
+
+\begin{frame}{Data}{Målvariable}
+  	\begin{itemize}
+  		\item Detaljomsetning og arbeidsledighet
+  			\begin{itemize}
+  				\item Nært knyttet til husholdningers atferd
+  				\item Publiseres månedlig
+  				\item Følges tett av analytikere
+  			\end{itemize} \ \\~\\
+		\item Sesongjusterte data \\~\\
+		\item Transformasjoner:
+			\begin{itemize}
+  				\item Detaljomsetning: $\Delta log(RS_t)$
+  				\item Arbeidsledighetsrate: $\Delta U_t$
+  			\end{itemize}
+  	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Data}{Google Trends}
+  	\begin{itemize}
+  		\item SVI $\equiv$ Indeks av relativ søkefrekvens for søketermer \\~\\
+  		\item To typer SVIer
+  			\begin{itemize}
+  				\item Kategorier
+  				\item Individuelle søketermer
+  			\end{itemize} \ \\~\\
+  		\item Månedlig data
+  			\begin{itemize}
+  				\item Men tilgjengelig fra første dag i måneden
+  			\end{itemize}  \ \\~\\
+  		\item Transformasjoner:
+  			\begin{itemize}
+  				\item $\Delta log(SVI_t)$
+  				\item Winsorizing på 95 \% nivå: begrense outliers
+  				\item Sesongjustering: månedlige dummier
+  			\end{itemize}
+  	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Variabelseleksjon}
+	\begin{itemize}
+		\item (Stor) modell med alle potensielle prediktorer:
+			\begin{align*}
+				y_{t} = \sum_{i = 1}^m \sum_{j = 0}^p \beta_{i, j} x_{i, t - j} + 	\varepsilon_{t}
+			\end{align*} \ \\~\\
+		\item Kun noen av $x$'ene er relevante prediktorer \ \\~\\
+		\item Ønsker ikke strukturell modell, kun prediksjon
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{LARS}{Efron et al. (2004)}
+	\begin{itemize}
+		\item Algoritme som bruker least angle regression for å tilpasse lineære modeller til data av høy dimensjonalitet \\~\\
+		\item Gelper and Croux (2008): Utvidelse av lars for tidsserier \\~\\
+		\item To steg:
+			\begin{enumerate}
+			\item Rangerer de potensielle prediktorene
+			\item Velger modellspesifikasjonen
+			\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Least angle regression}{Rangering}
+	\begin{itemize}
+		\item $\beta_{i} = 0 \ \forall \ i$
+		\item Finn prediktor, $x_i$, høyest korrelert med y
+		\item Øk $\beta_{i} = 0$ i retning av fortegnet på $corr(y, x_i)$
+			\begin{itemize}
+				\item Behold $r = y - \hat{y}$ på veien
+			\end{itemize}
+		\item Stopp når $corr(r,x_i) = corr(r,x_k)$
+		\item Øk $(\beta_j, \beta_k)$ i felles LS retning, $u_{i,k}$
+			\begin{itemize}
+				\item Behold $r = y - \hat{y}$ på veien
+			\end{itemize}
+		\item Stopp når $corr(r,u_{i,k}) = corr(r,x_m)$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Least angle regression}{Seleksjon}
+	\begin{itemize}
+		\item Etter hver iterasjon: OLS med alle rangerte prediktorer
+			\begin{itemize}
+				\item Lagrer BIC
+			\end{itemize} \ \\~\\
+		\item Minimerer BIC over alle modellene
+	\end{itemize}
+	
+	$$ \text{BIC} = \color{blue}{-2 \text{log-likelihood}} \ \color{red}{+} \ \color{red}{ln(n) k}$$
+\end{frame}
+
+
+\begin{frame}{Nowcasting}
+	\begin{itemize}
+		\item Treningssample: februar 2004 - desember 2009 \\~\\
+		\item Testsample: januar 2010 - januar 2017
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Nowcasting}{Estimering og prediksjon}
+		$$\text{Estimering: } \quad y_t = \textcolor{blue}{\beta_0 y_{t- 1}} + \textcolor{orange}{\sum_{i = 1}^{m^{*}}\sum_{j = 0}^{p^{*}} \beta_{i, j} x_{i, t - j}} + \varepsilon_t$$
+		
+		$$\text{Prediksjon: } \quad \hat{y}_{t + 1} = \textcolor{blue}{\hat{\beta}_0 y_t} + \textcolor{orange}{\sum_{i = 1}^{m^{*}}\sum_{j = 0}^{p^{*}} \hat{\beta}_{i, j} x_{i, t + 1 - j}}$$
+		
+		$${\text{\textcolor{blue}{AR}} }\quad \quad \text{\textcolor{orange}{SVI}} \quad \quad \text{\textcolor{blue}{AR}-\textcolor{orange}{SVI}}$$
+\end{frame}
+
+
+
+\begin{frame}{Nowcasting}{Evaluering}
+		$$\text{RMSE} = \sqrt{\frac{1}{P} \sum_{i = 1}^{P} \Big(y_{t + i} - \hat{y}_{t + i}\Big)^2} = \sqrt{\frac{1}{P} \sum_{i = 1}^{P} \Big(\mathrm{e}_{t + i}\Big)^2}$$
+		\\[40pt]
+		\center{DM-test:}
+		$$d_i (= \mathrm{e}_{t + i, 1}^2 - \mathrm{e}_{t + i, 2}^2) = \beta + u_i$$
+		$$H_0: \beta = 0 \quad eller \quad H_1: \beta \neq 0$$	
+\end{frame}
+
+
+
+
+\begin{frame}{Resultater}{Detaljomsetning}
+	\resizebox{\linewidth}{!}{
+\begin{tabular}{@{\extracolsep{4pt}}lcccccc@{}}
+\toprule
+						& \multicolumn{2}{c}{\textbf{Benchmark models}} & \multicolumn{2}{c}{\textbf{SVI models}} & \multicolumn{2}{c}{\textbf{AR-SVI models}} \\
+ \cline{2-3} \cline{4-5}  \cline{6-7} \\ [-1.5ex]
+								& AR(1) 			& Random walk 		& Categories 		& Queries 		& Categories 		& Queries \\ \\
+\textbf{Expanding window} 		& 0.9826 		& 1.8293	 		& 1.1752				& 1.1963 		& 0.9841			& 1.0433 \\
+\textcolor{blue}{\textbf{\% change from AR(1)}} 			& 				& 					& \textcolor{blue}{\textbf{(+20)$^{***}$}}	& \textcolor{blue}{\textbf{(+22)$^{*}$}} 	& \textcolor{blue}{\textbf{(0)}} 				& \textcolor{blue}{\textbf{(+6)$^{**}$}} \\
+\% change from random walk 		& 				& 					& (-36)$^{***}$ 		& (-35)$^{***}$ 	& (-46)$^{***}$		& (-43)$^{***}$ \\ \\
+			
+\textbf{Rolling window} 			& 0.9825 		& 1.8293 			& 1.2315 			& 1.3583 		& 1.0103 			& 1.0525 \\
+\textcolor{blue}{\textbf{\% change from AR(1)}} 			& 				& 					& \textcolor{blue}{\textbf{(+25)$^{**}$}}		& \textcolor{blue}{\textbf{(+38)$^{**}$}} 	& \textcolor{blue}{\textbf{(+3)}} 				& \textcolor{blue}{\textbf{(+7)}} \\
+\% change from random walk 		& 				& 					& (-33)$^{**}$ 		& (-26)$^{**}$ 	& (-45)$^{***}$ 		& (-42)$^{***}$ \\			
+\bottomrule
+\multicolumn{7}{l}{$^{*}p < 0.1$, $^{**}p < 0.05$, $^{***}p < 0.01$} \\
+\end{tabular}}
+\end{frame}
+
+
+
+\begin{frame}{Resultater}{Arbeidsledighet}
+\resizebox{\linewidth}{!}{
+\begin{tabular}{@{\extracolsep{4pt}}lcccccc@{}}
+  			\toprule
+ 			& \multicolumn{2}{c}{\textbf{Benchmark models}} & \multicolumn{2}{c}{\textbf{SVI models}} & \multicolumn{2}{c}{\textbf{AR-SVI models}} \\
+ 			\cline{2-3} \cline{4-5}  \cline{6-7} \\ [-1.5ex]
+			& AR(1) & Random walk & Categories & Queries & Categories & Queries \\ \\
+			\textbf{Expanding window} & 0.06129 & 0.08612 & 0.06311 & 0.05925 & 0.06907 & 0.06566 \\
+			\textcolor{blue}{\textbf{\% change from AR(1)}} & & & \textcolor{blue}{\textbf{(+3)}} & \textcolor{blue}{\textbf{(-3)}} & \textcolor{blue}{\textbf{(+13)$^{**}$}} & \textcolor{blue}{\textbf{(+7)$^{*}$}} \\
+			\% change from random walk & & & (-27)$^{**}$  & (-31)$^{***}$ & (-20)$^{**}$ & (-24)$^{***}$ \\ \\
+			
+			\textbf{Rolling window} & 0.06133 & 0.08612 & 0.05692 & 0.0597 & 0.06876 &  0.06443\\
+			\textcolor{blue}{\textbf{\% change from AR(1)}} & & & \textcolor{blue}{\textbf{(-7)}} & \textcolor{blue}{\textbf{(-3)}} & \textcolor{blue}{\textbf{(+12)$^{*}$}} & \textcolor{blue}{\textbf{(+5)}} \\
+			\% change from random walk & & & (-34)$^{***}$ & (-31)$^{***}$ & (-20)$^{**}$ & (-25)$^{***}$ \\			
+			\bottomrule
+			\multicolumn{7}{l}{$^{*}p < 0.1$, $^{**}p < 0.05$, $^{***}p < 0.01$} \\
+		\end{tabular}}
+\end{frame}
+
+
+
+\begin{frame}{Resultater}{Finanskrisen}
+\begin{figure}[H]
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{Expanding window.}
+\label{diff_sq_error_expanding_ar_urate}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/diff_sq_error_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{Rolling window.}
+\label{diff_sq_error_rolling_ar_urate}       
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/diff_sq_error_rolling_ar.pdf}
+    \end{subfigure}\hfill
+\caption{Unemployment rate. Difference in the squared prediction error between an AR(1) and the AR-$\text{SVI}_\text{c}$ model during the financial crisis. When the series is above zero, the AR-$\text{SVI}_\text{c}$ model outperforms the AR(1) model. January 2008 - December 2009.}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Diskusjon}
+	\begin{itemize}
+  		\item Subjektiv seleksjon i starten \\~\\
+  		\item Trekke ut relevante signaler fra SVIene
+  			\begin{itemize}
+  				\item DFM, PCA etc.
+  			\end{itemize} \ \\~\\
+  		\item Bedre i urolige tider? \\~\\
+  		\item SVI$_t$ tilgjengelig før y$_{t-1}$
+  	\end{itemize}
+\end{frame}
+
+
+\end{document}

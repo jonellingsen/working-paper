@@ -1,0 +1,112 @@
+\section{Variable selection}\label{variable_selection}
+
+After collecting all the SVIs that form the set of potential predictors, see Section \ref{svi}, I use a variable selection mechanism in order to reduce the dimensionality of the nowcasting model. I use an algorithm building on LARS\footnote{LARS is an abbreviation for Least Angle Regression, and the S represents "LASSO" and "Stagewise" which are related algorithms.}, first introduced by \textcite{efron2004}, which is an algorithm for fitting linear models to high-dimensional data. The LARS is designed for cross-sectional data. Because I work with time series, I build on the time series extension of the LARS, known as the TS-LARS, developed by \textcite{gelper2008}. There are two differences between the LARS and the TS-LARS. Firstly, the TS-LARS includes the predictors as blocks, consisting of the lags of the predictors. Secondly, while the original LARS uses the Mallows's $C_p$ as the selection criterion, the TS-LARS uses the Bayesian Information Criterion (BIC), which is more suitable for time series. I make small modifications to the TS-LARS algorithm to make it fit my problem. First, in section \ref{tslars}, I explain the original TS-LARS algorithm. Then, in section \ref{modifications}, I explain my extensions.
+
+
+
+\subsection{The TS-LARS algorithm}\label{tslars}
+
+The goal of a predictive model is to, in period $t$, make a prediction of a target variable in period $t + h$, which is denoted $y_{t + h}$, where $h = 0$ represents the nowcasting model.
+To do so, a large number, $m$, of potential predictors, $x_{j, t}$, where $j = 1, \ldots, m$, may be considered. This problem can be represented by the following unrestricted time series model:
+
+\begin{align}
+\begin{split}\label{ures_model}
+	y_{t + h} ={}& \beta_{0, 0} y_t + \ldots + \beta_{0, p_0} y_{t - p_0} \\ & +\beta_{1, 0} x_{1, t} + \ldots + \beta_{1, p_1} x_{1, t - p_1} + \ldots + \beta_{m, 0} x_{m, t} + \ldots + \beta_{m, p_m} x_{m, t - p_m} + \varepsilon_{t + h}
+\end{split}
+\end{align}
+
+\noindent where $h \geq 1$ is the forecast horizon and the intercept is excluded for simplicity. The history of the target variable is included up to lag $p_0$ and the history of predictor $j$ is included up to lag $p_j$ where $j = 1,  \ldots, m$. Each of the predictors enters the model as a block, i.e. a matrix where the columns are the lagged values of the predictor. Denote the $j$'th predictor block as $\underline{x}_j$. All the time series are covariance stationary\footnote{A time series is covariance stationary if the mean and covariance of the process do not depend on time.} by assumption. In order to simplify calculations, the TS-LARS standardizes all the variables to have a mean of zero and a unit variance\footnote{This is done by subtracting the mean and divide by the standard deviation.}. Therefore, there is no intercept in the model. The hypotheses is that only a subset of the predictors in model \eqref{ures_model} are relevant for predicting the target variable. Hence, the aim of the TS-LARS algorithm is to obtain a reduced model from model \eqref{ures_model}, that hopefully will improve the predictive power. The TS-LARS algorithm can be divided into two main steps. First, it ranks the potential predictors by the use of least angle regression, see section \ref{ranking}. Second, it chooses the optimal number of predictors and lags to include in the predictive model, by minimizing the BIC over the set of ranked predictors, see section \ref{selection}.
+
+
+
+\subsubsection{Ranking the predictors}\label{ranking}
+
+The following explains how the TS-LARS algorithm ranks the predictors. First, the algorithm fits an autoregressive model to the target variable by OLS\footnote{The order of the AR model that the TS-LARS starts by fitting is specified by the user.}. Denote the standardized\footnote{Standardized refers to a time series that has a mean of zero and unit variance.} residuals from that model, $z_0$.
+
+Now, the aim of the TS-LARS is to find the predictors that best predict this residual. The TS-LARS thus ranks the variables according to how much they improve the in-sample fit from the simple autoregressive model. To do so, the algorithm finds the first ranked predictor block, $\underline{x}_j$, which is the one that maximizes the $R^2$ from an OLS regression of $z_0$ on $\underline{x}_j$ for $j = 1, \ldots, m$, denoted $R^2(z_0 \sim \underline{x}_j)$. Recall that $\underline{x}_j$ is a matrix whose columns are the lagged $x_j$'s. The first ranked predictor block is denoted by $\underline{x}_{(1)}$. $\underline{x}_{(1)}$ is then included as the first predictor block in the active set, denoted $A$. The active set, $A$, will expand by one predictor block for each stage, and it will always include all the predictor blocks ranked so far. Denote the complement of the active set by $A^c$, i.e. all the predictor blocks not ranked yet. Let $H_{(1)}$ be the projection matrix on the column space of $\underline{x}_{(1)}$ such that
+\begin{equation}\label{projection}
+	H_{(1)} = \underline{x}_{(1)} (\underline{x'}_{(1)} \underline{x}_{(1)})^{-1} \underline{x'}_{(1)}
+\end{equation}
+\noindent Hence, $\hat{z}_0 =  H_{(1)} z_0$ will be the vector of fitted values. Furthermore, the current target variable, $z_0$, is updated by removing the effect of $\underline{x}_{(1)}$:
+\begin{equation}\label{updated_response}
+	z_1 = z_0 - \gamma_1 \hat{z}_0 \quad \quad \text{where} \quad \quad 0 \leq \gamma_1 \leq 1
+\end{equation}
+\noindent In OLS, $\gamma_1 = 1$, but this will not be the case in least angle regression. $\gamma_1$ is called the shrinkage factor, and represents the nice property of the TS-LARS; it shrinks the OLS parameter, $\hat{z}$, towards zero. $\gamma_1$ is chosen as the smallest positive value, such that:
+\begin{equation}\label{rsquared}
+	R^2(z_0 - \gamma_1 \hat{z}_0 \sim \underline{x}_{(1)}) = R^2(z_0 - \gamma_1 \hat{z}_0 \sim \underline{x}_{j}) \quad \quad \text{where} \quad 				\quad j \in A^c
+\end{equation}
+\noindent The solution of condition \eqref{rsquared}, as shown in \textcite{gelper2008}, is the same solution obtained by solving the following quadratic equation in $\gamma$:
+\begin{equation}\label{rsquared_solution}
+	z'_0 (H_{(1)} - H_j) z_0 + z'_0 (H_{(1)} H_j + H_j H_{(1)} - 2 H_{(1)}) 		z_0 \gamma + z'_0 (H_{(1)} - H_{(1)} H_j H_{(1)}) z_0 \gamma^2 = 		0
+\end{equation}
+\noindent where $H_j = \underline{x}_{(j)} (\underline{x'}_{(j)}\underline{x}_{(j)})^{-1} \underline{x'}_{(j)}$.  As shown in \textcite{gelper2008} there are two solutions for condition \eqref{rsquared_solution}, where at least one of them is between zero and one. As described above, $\gamma_1$ is chosen as the smallest positive solution to condition \eqref{rsquared_solution}, where $j$ runs over the whole non-active set, $A^c$.
+
+We can simplify equation \eqref{rsquared_solution} and avoid using multiple matrix multiplications. Let $\tilde{x}_{(1)}$ be the standardized $\hat{z}_0$, such that:
+\begin{equation}\label{x_tilde}
+	\tilde{x}_{(1)} = \frac{\hat{z}_0}{s_1} \quad \quad \text{where} \quad \quad s_1^2 = \frac{\hat{z}'_0 \hat{z}_0}{T - 1}
+\end{equation}
+\noindent where T is the number of observations in $\hat{z}_0$. Further, \textcite{gelper2008} show that equation \eqref{rsquared_solution} is equivalent to:
+\begin{equation}\label{rsquared_solution_simplified}
+	(T - 1) s_1^2 - z'_0 H_j z_0 + 2(z'_0 H_j \tilde{x}_{(1)} - (T - 1) s_1)(s_1 \gamma) + ((T - 1) - \tilde{x}'_{(1)} H_j \tilde{x}_{(1)})(s_1 \gamma)^2 = 0
+\end{equation}
+\noindent which is computationally faster to solve.
+
+The shrinkage parameter, $\gamma_1$, in equation \eqref{updated_response}, is chosen simultaneously with the next ranked predictor block that is included in the active set. Denote the second ranked predictor block by $\underline{x}_{(2)}$. Now, the active set, $A$, contains two predictor blocks. Furthermore, the current target variable is updated according to equation \eqref{updated_response}, and then scaled as in equation \eqref{x_tilde}. These operations form the first step in the ranking part of the TS-LARS algorithm.
+
+All the further steps in the ranking process have the same structure. Let the current step be denoted $k \geq 2$. Now, $A$ contains $k$ ranked predictor blocks, denoted $\underline{x}_{(1)}, \underline{x}_{(2)}, \ldots, \underline{x}_{(k)}$. Denote the current target variable by $z_{k - 1}$, and let $\tilde{x}_{(i)}$ be the standardized vector of fitted values for $i = 1, 2, \ldots, k$. Now the, TS-LARS will obtain the so-called \textit{equiangular vector}, $u_k$, which is defined as the vector that is equally correlated with the vectors $\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)}$. Let that spesific correlation coefficient be denoted by $a_k$:
+\begin{equation}\label{correlation}
+	a_k = \text{Cor}(u_k, \tilde{x}_{(1)}) = \text{Cor}(u_k, \tilde{x}_{(2)}) = \ldots = \text{Cor}(u_k, \tilde{x}_{(k)})
+\end{equation}
+\noindent Let $R_k$ be the correlation matrix for $\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)}$, and let $\mathbf{1}_k$ be a vector of ones of length k. Then,
+\begin{equation}\label{equiangular_vector}
+	u_k = (\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)}) w_k \quad \quad \text{where} \quad \quad w_k = \frac{R_k^{-1} \mathbf{1}_k}{\sqrt{\mathbf{1}_k' R_k^{-1} \mathbf{1}_k}}
+\end{equation}
+
+Next, the current target variable is updated as in equation \eqref{updated_response}, but now it moves along the direction of the equiangular vector, $u_k$, such that:
+\begin{equation}\label{update_equiangular}
+	z_k = z_{k - 1} - \gamma_k u_k
+\end{equation}
+\noindent Again, $\gamma_k$ is obtained as the smallest positive value such that the following condition holds
+\begin{equation}\label{rsquared_equiangular}
+	R^2(z_{k - 1} - \gamma u_k \sim \tilde{x}_{(k)}) = R^2(z_{k - 1} - \gamma u_k \sim \underline{x}_j)
+\end{equation}
+\noindent The chosen predictor, denoted $x_{k + 1}$, is then added to the active set, $A$, and the current target variable is updated according to equation \eqref{update_equiangular}, standardized and denoted $z_k$. \textcite{gelper2008} prove the following lemma:
+
+\begin{lemma}
+For every step $k \leq 1$ in the TS-LARS algorithm, it holds that
+\begin{enumerate}
+\item The current response $z_{k - 1}$ has equal and positive correlation with all
+\newline $(\tilde{x}_{(1)}, \tilde{x}_{(2)}, \ldots, \tilde{x}_{(k)})$ in the active set:
+\begin{equation}\label{lemma}
+r_k = \text{Cor}(z_{k - 1}, \tilde{x}_{(1)}) = \ldots = \text{Cor}(z_{k - 1}, \tilde{x}_{(k)}) \geq 0
+\end{equation}
+\item For every $j$ not in the active set, it holds that
+$$R^2(z_{k-1}\sim \underline{x}_j) \leq r_k^2$$
+\item For the solution $\gamma_k$ to \eqref{rsquared_equiangular} it holds that $0 \leq \gamma_k \leq r_k / a_k$
+\end{enumerate}
+\end{lemma}
+\noindent They show that, from the above lemma, we can replace the index k in equation \eqref{rsquared_equiangular} by any other number from 1 to $k$. Further, they show that, by using $r_k$ from equation \eqref{lemma}, condition \eqref{update_equiangular} is equivalent to solving the following quadratic equation in $\gamma$:
+\begin{equation}\label{rsquared_equiangular_simplified}
+	(T - 1) r_k^2 - z'_{k - 1} H_j z_{k - 1} + 2(z'_{k - 1} H_j u_k - (T - 1) a_k r_k) \gamma + ((T - 1) a_k^2 - u'_k H_j u_k) \gamma^2 = 0
+\end{equation}
+\noindent The TS-LARS will solve equation \eqref{rsquared_equiangular_simplified} for all $j \in A^c$ and picks the smallest positive solution. The chosen predictor block is, as before, added to the active set, and denoted $\underline{x}_{(k + 1)}$. The TS-LARS will continue this process until all the potential predictor blocks are ranked.
+
+
+
+
+\subsubsection{Selecting the optimal number of predictors and lags}\label{selection}
+The last step in the TS-LARS algorithm chooses how many of the top ranked predictors and lags of them to include in the final predictive model. This selection is done by minimizing the bayesian information criterion (BIC). The BIC is defined as:
+\begin{equation}\label{bic}
+\text{BIC} = -2 \text{log-likelihood} + ln(n) k
+\end{equation}
+\noindent where $n = \text{\# of variables}$ and $k = \text{\# of parameters}$. Hence, because a lower value is preferred, the BIC rewards the in-sample fit, by the first term, and penalizes the number of parameters in the model, by the second term.
+
+The selection process is performed in the following way. For every step in the TS-LARS where a new predictor block is included, the algorithm estimates the model with the predictor blocks in the active set with OLS, and stores the BIC value. In addition every step is performed for different lag lengths, and hence different number of columns in the predictor blocks. The selection process thus boils down to choosing the model with the lowest BIC value among all the estimated models. For simplicity, the lag length is fixed across predictors. As an example, if I specify the model to rank 5 variables and include maximum 2 lags, the number of models to evaluate by the BIC will be 10 $(5 \times 2)$.
+
+
+
+\subsection{Modifications of the TS-LARS algorithm}\label{modifications}
+
+I perform two modifications of the TS-LARS algorithm, presented in \textcite{gelper2008}, to suit my research question. Firstly, since I perform nowcasting, I include the predictors contemporaneously in the predictive model, as well as their lags. Secondly, in addition to conditioning on the AR(1), as in the TS-LARS algorithm, I also run the run the TS-LARS algorithm without conditioning on the AR(1), i.e. I run a predictive model that only includes the SVIs as predictors. The first approach, where I condition on the AR(1), will highlight the value added, relative to an AR(1) model, produced by the SVIs. The second approach will highlight how well the SVIs perform in predicting the target variable at their own. Due to the timeliness of the SVIs, the second approach will make nowcasts possible during the current month before the lag of the target variable is published. However, I stress that this analysis use end-of-month data for the SVIs, due to the practice of Google Trends concerning historical data.
+
+I set the maximum number of predictors to include in the model to 5\footnote{Lags of the predictors and the autoregressive term comes in addition to these 5 predictors.}. Furthermore, I allow maximum 1 lag of the predictors to be included. I have performed a crosscheck where I find that increasing the maximum number of predictors to include in the model to 10 does not improve the performance. In terms of interpretability, I prefer a parsimonious model over a large one, and hence choose to set the restriction in the TS-LARS to maximum 5 predictors each period.

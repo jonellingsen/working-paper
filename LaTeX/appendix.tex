@@ -1,0 +1,211 @@
+\section{Stationarity tests}\label{stationarity}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{@{}XXXX@{}}
+\toprule
+& \textbf{Test statistic} & \textbf{p-value} & \textbf{Lags included} \\ 
+\midrule
+$\Delta log(RS_t)$ & -9.3641 & $<$0.01 & 2 \\ \\
+
+$\Delta U_t$ & -3.6914 & 0.0272 & 3 \\
+\bottomrule
+\end{tabularx}
+\caption{Augmented Dickey-Fuller test. $H_0$: Non-Stationarity. The lags of each of the variables is chosen according to the Aikaike information criterion (AIC).}
+\label{adf}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Correlations between the SVIs over time}\label{correlation_svi}
+
+\begin{figure}[H]
+\centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{SVI$_c^{RS}$}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/correlation_svi.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{SVI$_q^{RS}$}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/correlation_svi.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{SVI$_c^U$}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/correlation_svi.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{SVI$_q^U$}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/correlation_svi.pdf}
+    \end{subfigure}
+    \caption{Distribution of correlations between identical SVIs, both related to retail sales (RS) and unemployemt (U) and at the category level (c) and the query level (q). I download identical SVIs at different dates, and compute the correlations between the same SVIs at different dates, in order to quantify the sampling effect of the Trends data. The dates I have donwloaded the SVI at are 03.04, 21.04, 22.04, 24.04, 25.04, 27.04 and 28.04.}
+	\label{fig:correlation_svi}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Correlations between the SVIs and the target variables}\label{correlation_target}
+
+\begin{figure}[H]
+\centering
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\Delta log(SVI_{c,t}^{RS})$ and $\Delta log(RS_t)$}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/correlation_rsales.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+\caption{$\Delta log(SVI_{q,t}^{RS})$ and $\Delta log(RS_t)$}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/correlation_rsales.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+ \caption{$\Delta log(SVI_{c,t}^{RS})$ and $\Delta U_t$}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/correlation_urate.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\caption{$\Delta log(SVI_{q,t}^{RS})$ and $\Delta U_t$}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/correlation_urate.pdf}
+    \end{subfigure}
+    \caption{Distribution of correlations between the transformed SVIs, at the category level (c) and the query level (q), and the transformed target variables, i.e. retail sales and unemployment rate.}
+	\label{fig:correlation_target}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{List of SVIs}\label{svi_list}
+
+\begin{table}[H]
+	\center
+	\scriptsize
+	\begin{tabularx}{\textwidth}{@{}llX@{}}
+		\toprule
+ 		\textbf{Target variable} & \textbf{Type of SVI} & \textbf{Names} \\ 
+  		\midrule
+		Retail sales & Categories & Shopping, Antiques \& Collectibles, Apparel, Athletic Apparel, Casual Apparel, Children's Clothing, Clothing Accessories, Costumes, Eyewear, Eyeglasses \& Contacts, Footwear, Formal Wear, Men's Clothing, Outerwear, Sleepwear, Swimwear, Undergarments, Women's Clothing, Auctions, Classifieds, Consumer Electronics, Audio Equipment, Camera \& Photo Equipment, Car Electronics, GPS \& Navigation, Electronic Accessories, Gadgets \& Portable Electronics, Game Systems \& Consoles, TV \& Video Equipment, Consumer Resources, Product Reviews \& Price Comparisons, Entertainment Media, Book Retailers, CD \& Audio Shopping, DVD \& Video Shopping, Entertainment Media Rentals, Video Game Retailers, Gifts \& Special Event Items, Cards \& Greetings, Flowers, Gifts, Party \& Holiday Supplies, Luxury Goods, Mass Merchants \& Department Stores, Shopping Portals \& Search Engines, Sporting Goods, Bicycles \& Accessories, Ticket Sales, Tobacco Products, Toys \\
+  		& Queries & adidas, album, alkohol, apple, auksjon, auksjoner, bag, bang olufsen, barbie, beats, bergans, best i test, bh, bianco, bilstereo, biltema, bmx, boots, bord, bose, boxer, br, brio, bryllup, bursdag, canon, cd, cdon, clas ohlson, converse, data, denon, diamant, dinside, dress, dvd, ebay, elektronikk, elkjøp, eos, expert, felleskjøpet, film + filmer, finn.no, foto, fotoknudsen, fujifilm, fujitsu, gadgets, gant, garmin, gps, gull, gullsmed, headset, helly hansen, hodetelefoner, husqvarna, ikea, interiør, intersport, ipod, japan foto, jbl, jeans, kamera, kari traa, kelkoo, kjøpesenter, klær, kunst, laptop, lcd, lefdal, lego, leica, leker, lg, libris, lingerie, linser, louis vuitton, lp, merida, musikk, møbler, nelly, netcom, nettauksjon, netthandelen, nike, nikon, nintendo, norrøna, north face, oakley, olympus, omega, panasonic, panties, party, peak, philips, pioneer, plasma, platekompaniet, polo, pris, qxl, ralph lauren, review, ring, rolex, røyk, samsung, scott, seiko, seng, sennheiser, shimano, shorts, skjerm, sko, snus, sofa, sony, spill, stereo, støvler, subwoofer, tablet, tandberg, tanum, thune, tivoli, tobakk, trek, tusenfryd, tv, tv2 hjelper deg, urmaker, vest, vintage, vinyl, xbox, xxl, yamaha, zara \\
+  		\midrule
+  		Unemployment rate & Categories & Jobs \& Education, Jobs, Career Resources \& Planning, Job Listings, Resumes \& Portfolios, Welfare \& Unemployment \\
+  		& Queries & cv, finn, finn.no, hvordan skrive cv, hvordan skrive søknad, job, jobb, jobb søknad, jobber, jobbsøknad, jobs, kurs, ledig jobb, ledig stilling, ledige stillinger, mal cv, nav, resume, samordna opptak, skrive jobbsøknad, sommerjobb, stilling, stillinger, søke, søknad, trygd, trygdekontoret, utdanning, oppsigelse, adecco, manpower \\
+   		\bottomrule
+	\end{tabularx}
+	\caption{List of all the search value indices considered.}
+	\label{tab:svi_list}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Breakdown of the nowcasting models}\label{model_breakdown}
+
+Figures \ref{model_cat_rsales}, \ref{model_queries_rsales}, \ref{model_cat_urate} and \ref{model_queries_urate} show the predictors included in the models throughout the test sample from January 2010 - January 2017. A black spot indicates that the belonging SVI is included in the nowcasting model. The top of the figures indicate whether a lag of the predictors is included.
+
+\begin{figure}[ht]
+\centering
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{c}}$ model. Expanding window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/model_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{c}}$ model. Rolling window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/model_rolling.pdf}
+    \end{subfigure}
+\end{figure}
+\begin{figure}\ContinuedFloat
+\begin{subfigure}[b]{\textwidth}
+ \caption{AR-SVI$_{\text{c}}$ model. Expanding window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/model_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{\textwidth}
+\caption{AR-SVI$_{\text{c}}$ model. Rolling window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/categories/graphs/model_rolling_ar.pdf}
+    \end{subfigure}
+    \caption{Retail sales. Category SVIs included in the models. A black spot indicates that the belonging SVI is included in the nowcasting model. The top of the figures indicate whether a lag of the predictors is included.}
+\label{model_cat_rsales}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{q}}$ model. Expanding window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/model_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{q}}$ model. Rolling window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/model_rolling.pdf}
+    \end{subfigure}
+\end{figure}
+\begin{figure}\ContinuedFloat
+\begin{subfigure}[b]{\textwidth}
+ \caption{AR-SVI$_{\text{q}}$ model. Expanding window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/model_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{\textwidth}
+\caption{AR-SVI$_{\text{q}}$ model. Rolling window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/retail sales/words/graphs/model_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Retail sales. Query SVIs included in the models. A black spot indicates that the belonging SVI is included in the nowcasting model. The top of the figures indicate whether a lag of the predictors is included.}
+\label{model_queries_rsales}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{c}}$ model. Expanding window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/model_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{c}}$ model. Rolling window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/model_rolling.pdf}
+    \end{subfigure}
+\end{figure}
+\begin{figure}\ContinuedFloat
+\begin{subfigure}[b]{\textwidth}
+ \caption{AR-SVI$_{\text{c}}$ model. Expanding window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/model_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{\textwidth}
+\caption{AR-SVI$_{\text{c}}$ model. Rolling window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/categories/graphs/model_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Unemployment rate. Category SVIs included in the models. A black spot indicates that the belonging SVI is included in the nowcasting model. The top of the figures indicate whether a lag of the predictors is included.}
+\label{model_cat_urate}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{q}}$ model. Expanding window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/model_expanding.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{\textwidth}
+\caption{SVI$_{\text{q}}$ model. Rolling window.}
+        \includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/model_rolling.pdf}
+    \end{subfigure}
+\end{figure}
+\begin{figure}\ContinuedFloat
+\begin{subfigure}[b]{\textwidth}
+ \caption{AR-SVI$_{\text{q}}$ model. Expanding window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/model_expanding_ar.pdf}
+    \end{subfigure}
+\begin{subfigure}[b]{\textwidth}
+\caption{AR-SVI$_{\text{q}}$ model. Rolling window.}        
+\includegraphics[width=\textwidth]{/Users/jonellingsen/Dropbox/Master/dataAnalysis/unemployment/words/graphs/model_rolling_ar.pdf}
+    \end{subfigure}
+\caption{Unemployment rate. Query SVIs included in the models. A black spot indicates that the belonging SVI is included in the nowcasting model. The top of the figures indicate whether a lag of the predictors is included.}
+\label{model_queries_urate}
+\end{figure}
