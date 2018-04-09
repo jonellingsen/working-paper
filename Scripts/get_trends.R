@@ -8,8 +8,10 @@ rm(list = ls())
 
 setwd("~/Dropbox/Working paper/Scripts")
 library(gtrendsR)
-# Import function
-source('GetTrendsData.R')
+# Import functions
+sapply(list.files(pattern = "[.]R$",
+                  path = "~/Dropbox/Working Paper/Functions",
+                  full.names = TRUE), source)
 
 
 
@@ -39,22 +41,17 @@ categories = categories[!duplicated(categories$name), ]
 
 # Download data from Google trends -----------------------------------------------------------
 
-trendsData = GetTrendsData(categories)
+rawData = GetTrendsData(categories)
 
 
 
-# Remove variables that contain NAs or zeros. Save trends. -----------------------------------------------------------
+# Preprocess data ---------------------------------------------------------
 
-categories = categories[!apply(is.na(trendsData), 2, any), ]
-trendsData = trendsData[, !apply(is.na(trendsData), 2, any)]
-
-categories = categories[!apply(trendsData == 0, 2, any), ]
-trendsData = trendsData[, !apply(trendsData == 0, 2, any)]
-
-colnames(trendsData) = categories$name
+data = ProcessData(rawData)
 
 
 # Save data ---------------------------------------------------------------
 
 setwd("~/Dropbox/Working paper/Data")
-save(trendsData, file = "trendsData.RData")
+save(rawData, file = "raw_data_retail_sales_categories.RData")
+save(data, file = "data_retail_sales_categories.RData")
